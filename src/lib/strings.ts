@@ -27,7 +27,8 @@ export const ui = {
   contactOffice: 'Или ни посетете в нашия офис',
   contactTripInquiry: (tripName: string) => `Запитване за: ${tripName}`,
   priceFrom: (price: string) => `от ${price}`,
-  moreDates: (count: number) => `(+ още ${count})`,
+  moreDates: (count: number) =>
+    count === 1 ? '(+ още 1 дата)' : `(+ още ${count} дати)`,
   nextDeparture: (date: string) => `Следващо заминаване: ${date}`,
   allTrips: '← Всички екскурзии',
   datesAndPricing: 'Дати и цени',
@@ -50,6 +51,8 @@ export const ui = {
   closeGallery: 'Затвори галерията',
   previousPhoto: 'Предишна снимка',
   nextPhoto: 'Следваща снимка',
+  previousGalleryPhotos: 'Предишни снимки',
+  nextGalleryPhotos: 'Следващи снимки',
   switchToDark: 'Превключи на тъмен режим',
   switchToLight: 'Превключи на светъл режим',
   darkMode: 'Тъмен режим',

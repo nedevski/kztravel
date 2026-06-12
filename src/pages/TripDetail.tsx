@@ -101,6 +101,15 @@ export function TripDetail() {
             <InclusionList items={trip.excluded} variant="excluded" />
           </section>
         )}
+
+        <div className="trip-detail__footer-cta">
+          <Link
+            to={`/contact?trip=${trip.slug}`}
+            className="btn btn--primary trip-detail__cta"
+          >
+            {ui.bookNow}
+          </Link>
+        </div>
       </article>
     </>
   )

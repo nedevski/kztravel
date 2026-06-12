@@ -1,9 +1,15 @@
 import { useEffect, type CSSProperties } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { siteSettings } from '@/lib/loadData'
 
 export function Layout() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   useEffect(() => {
     const link =
       document.querySelector<HTMLLinkElement>("link[rel='icon']") ??
