@@ -53,7 +53,10 @@ export function Contact() {
         </section>
 
         <section className="contact__map-section">
-          <p className="contact__map-label">{contact.address}</p>
+          <div className="contact__item">
+            <span className="contact__label">{ui.contactOffice}</span>
+            <p className="contact__map-label">{contact.address}</p>
+          </div>
           <div className="contact__map">
             <iframe
               title={contact.address}

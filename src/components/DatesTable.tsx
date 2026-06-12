@@ -26,11 +26,11 @@ export function DatesTable({ dates }: DatesTableProps) {
               <td>{formatPrice(entry.price)}</td>
               <td>
                 {entry.available ? (
-                  <span className="dates-table__status dates-table__status--available">
+                  <span className="status-chip status-chip--available">
                     {ui.available}
                   </span>
                 ) : (
-                  <span className="dates-table__status dates-table__status--soldout">
+                  <span className="status-chip status-chip--soldout">
                     {ui.soldOut}
                   </span>
                 )}

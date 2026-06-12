@@ -32,13 +32,7 @@ export function TripDetail() {
             alt={trip.name}
             className="trip-detail__slideshow"
           />
-          <Link
-            to={`/contact?trip=${trip.slug}`}
-            className="btn btn--primary trip-detail__cta"
-          >
-            {ui.bookNow}
-          </Link>
-          <div className="trip-detail__hero-content">
+          <div className="trip-detail__hero-bar">
             <div className="trip-detail__badges">
               <Link
                 to={`/${buildFilterSearch(trip.country)}`}
@@ -52,6 +46,14 @@ export function TripDetail() {
                 </span>
               ))}
             </div>
+            <Link
+              to={`/contact?trip=${trip.slug}`}
+              className="btn btn--primary trip-detail__cta"
+            >
+              {ui.bookNow}
+            </Link>
+          </div>
+          <div className="trip-detail__hero-content">
             <h1 className="trip-detail__title">{trip.name}</h1>
             {trip.duration && <p className="trip-detail__duration">{trip.duration}</p>}
             <p className="trip-detail__description">{trip.description}</p>

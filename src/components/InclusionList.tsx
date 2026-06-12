@@ -11,21 +11,31 @@ export function InclusionList({ items, variant }: InclusionListProps) {
   if (items.length === 0) return null
 
   return (
-    <ul className={`inclusion-list inclusion-list--${variant}`}>
-      {items.map((item) => (
-        <li key={item.name} className="inclusion-list__item">
-          <span className="inclusion-list__name">{item.name}</span>
-          <span className="inclusion-list__price">
-            {variant === 'included'
-              ? !item.price
-                ? ui.includedPrice
-                : formatPrice(item.price)
-              : item.price
-                ? formatPrice(item.price)
-                : ui.onRequest}
-          </span>
-        </li>
-      ))}
-    </ul>
+    <div className={`inclusion-table inclusion-table--${variant}`}>
+      <table>
+        <thead>
+          <tr>
+            <th>{ui.item}</th>
+            <th>{ui.price}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => (
+            <tr key={item.name}>
+              <td>{item.name}</td>
+              <td>
+                {variant === 'included'
+                  ? !item.price
+                    ? ui.includedPrice
+                    : formatPrice(item.price)
+                  : item.price
+                    ? formatPrice(item.price)
+                    : ui.onRequest}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
