@@ -1,10 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Гърция · основна снимка">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0ea5e9"/>
-      <stop offset="100%" stop-color="#1e40af"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0369a1"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
     </linearGradient>
   </defs>
-  <rect width="800" height="500" fill="url(#bg)"/>
-  <text x="400" y="260" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="28" font-weight="600" opacity="0.92">Гърция · основна снимка</text>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <circle cx="120" cy="85" r="40" fill="#fde047" opacity="0.95"/>
+  <path d="M0 350 L800 350 L800 500 L0 500 Z" fill="url(#sea)"/>
+  <path d="M0 200 L200 350 L800 350 L800 500 L0 500 Z" fill="#e7e5e4" opacity="0.3"/>
+  <g transform="translate(80, 180)">
+    <rect x="0" y="60" width="55" height="45" rx="2" fill="#fff"/>
+    <rect x="65" y="45" width="50" height="60" rx="2" fill="#f8fafc"/>
+    <rect x="125" y="55" width="48" height="50" rx="2" fill="#fff"/>
+    <rect x="183" y="40" width="52" height="65" rx="2" fill="#f1f5f9"/>
+    <rect x="245" y="50" width="45" height="55" rx="2" fill="#fff"/>
+    <rect x="12" y="72" width="14" height="18" fill="#38bdf8" opacity="0.5"/>
+    <rect x="78" y="58" width="14" height="18" fill="#38bdf8" opacity="0.5"/>
+    <rect x="138" y="68" width="14" height="18" fill="#38bdf8" opacity="0.5"/>
+    <rect x="198" y="55" width="14" height="18" fill="#38bdf8" opacity="0.5"/>
+    <rect x="258" y="65" width="14" height="18" fill="#38bdf8" opacity="0.5"/>
+    <path d="M300 95 L340 95 L320 60 Z" fill="#2563eb"/>
+    <ellipse cx="320" cy="58" rx="14" ry="6" fill="#2563eb"/>
+  </g>
+  <g transform="translate(420, 160)">
+    <rect x="0" y="70" width="60" height="50" rx="2" fill="#fff"/>
+    <rect x="70" y="55" width="55" height="65" rx="2" fill="#f8fafc"/>
+    <rect x="135" y="65" width="50" height="55" rx="2" fill="#fff"/>
+    <rect x="195" y="50" width="58" height="70" rx="2" fill="#f1f5f9"/>
+    <rect x="14" y="82" width="14" height="16" fill="#38bdf8" opacity="0.45"/>
+    <rect x="84" y="68" width="14" height="16" fill="#38bdf8" opacity="0.45"/>
+    <rect x="149" y="78" width="14" height="16" fill="#38bdf8" opacity="0.45"/>
+    <path d="M260 100 L300 100 L280 65 Z" fill="#1d4ed8"/>
+    <ellipse cx="280" cy="63" rx="14" ry="6" fill="#1d4ed8"/>
+  </g>
+  <g transform="translate(600, 200)">
+    <rect x="0" y="50" width="45" height="40" rx="2" fill="#fff"/>
+    <rect x="55" y="40" width="42" height="50" rx="2" fill="#f8fafc"/>
+    <rect x="12" y="60" width="12" height="14" fill="#38bdf8" opacity="0.4"/>
+  </g>
+  <text x="400" y="470" text-anchor="middle" fill="#1e40af" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Гърция · основна снимка</text>
 </svg>
