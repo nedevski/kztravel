@@ -1,0 +1,63 @@
+name: Бягство по албанското крайбрежие
+description: >
+  Открийте залъчена от слънце Албанската ривиера — кристално чисти води, скрити заливи
+  и очарователни крайбрежни села. Седем нощи релакс с екскурзии по един от най-добре
+  пазените морски тайни на Европа.
+country: albania
+duration: 7 дни
+category:
+  - плаж
+  - семейно
+  - лято
+  - с-водач
+thumbnails:
+  - /images/trips/albania/hero-1.svg
+  - /images/trips/albania/hero-2.svg
+dates:
+  - date: 2026-07-15
+    price: 450
+    available: true
+  - date: 2026-08-12
+    price: 490
+    available: false
+  - date: 2026-09-05
+    price: 420
+    available: true
+gallery:
+  - /images/trips/albania/gallery-1.svg
+  - /images/trips/albania/gallery-2.svg
+  - /images/trips/albania/gallery-3.svg
+itinerary:
+  - day: 1
+    title: Пристигане в Тирана
+    description: Трансфер до хотела, приветствена вечеря и ориентация.
+  - day: 2
+    title: Крайбрежен път до Дърми
+    description: Живописно пътуване по ривиерата със спирки на панорамни гледки.
+  - day: 3
+    title: Плажен ден в Ксамил
+    description: Свободно време на бели пясъчни плажове и по желание лодкова екскурзия.
+  - day: 4
+    title: Обект на ЮНЕСКО Бутринт
+    description: Екскурзия с водач из древните руини и обяд в Саранда.
+  - day: 5
+    title: Проход Ллогара
+    description: Планинска екскурзия със зашеметяващи гледки към морето.
+  - day: 6
+    title: Свободен ден
+    description: Релакс в курорта или разглеждане на местни села в собствено темпо.
+  - day: 7
+    title: Отпътуване
+    description: Закуска и трансфер до летището в Тирана.
+included:
+  - name: Настаняване (7 нощи)
+    price: 0
+  - name: Закуска всеки ден
+    price: 0
+  - name: Екскурзии с водач
+    price: 0
+excluded:
+  - name: Застраховка за пътуване
+    price: 35
+  - name: Трансфер от/до летище
+    price: 25

@@ -1,0 +1,8 @@
+title: Ваканции Казанлък
+favicon: /images/favicon.svg
+background: /images/bg.svg
+contact:
+  phone: "+359 888 123 456"
+  email: info@kztravel.bg
+  address: 'пл. „Севтополис“, 6100 Казанлък, България'
+  mapEmbedUrl: https://www.openstreetmap.org/export/embed.html?bbox=25.3902%2C42.6164%2C25.3954%2C42.6214&layer=mapnik&marker=42.6189%2C25.3928

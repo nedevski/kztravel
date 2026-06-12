@@ -1,73 +1,250 @@
-# React + TypeScript + Vite
+# KZ Travel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Статичен уебсайт за каталог с туристически екскурзии. Цялото съдържание (текстове, цени, снимки) се пази в обикновени файлове — **не е нужно да пипате код**, за да добавите или промените екскурзия.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Ръководство за съдържание
 
-## React Compiler
+> Тази секция е за хора, които поддържат сайта — добавят екскурзии, сменят цени, качват снимки. Не са нужни програмистски умения, но трябва внимателно да следвате формата на файловете.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Как работи сайтът накратко
 
-## Expanding the ESLint configuration
+1. Текстовете и данните за всяка екскурзия са в отделен файл в папката `data/trips/`.
+2. Снимките се пазят в папката `public/images/`.
+3. След като запазите промените и ги качите в GitHub, сайтът се обновява автоматично (обикновено за 1–2 минути).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Можете да редактирате файловете:
+- **директно в GitHub** (бутон *Edit* при отваряне на файл) — най-лесно, ако нямате инсталирани програми;
+- с **Бележник (Notepad)** или **VS Code** на компютъра, ако работите с копие на проекта.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Къде какво се намира
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+data/
+  site.yaml              ← общи настройки на сайта (заглавие, иконка, фон)
+  trips/
+    albania-coast.yaml   ← един файл = една екскурзия
+    greek-islands.yaml
+    ...
+
+public/
+  images/
+    favicon.svg          ← малката иконка в таба на браузъра
+    bg.svg               ← фоново изображение на сайта
+    trips/
+      albania/           ← снимки за конкретна екскурзия
+        hero-1.jpg
+        gallery-1.jpg
+      ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Общи настройки на сайта (`data/site.yaml`)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Този файл се редактира рядко. Пример:
+
+```yaml
+title: KZ Travel
+favicon: /images/favicon.svg
+background: /images/bg.svg
 ```
+
+| Поле | Какво прави |
+|------|-------------|
+| `title` | Името на агенцията — показва се в заглавието на страницата и в хедъра |
+| `favicon` | Малката иконка в таба на браузъра |
+| `background` | Фоново изображение на целия сайт (може да се пропусне) |
+
+За нова снимка (иконка или фон): качете файла в `public/images/` и посочете пътя с `/images/...` както в примера.
+
+---
+
+### Как да добавите снимки
+
+1. Създайте подпапка за екскурзията, напр. `public/images/trips/italy/`.
+2. Качете снимките там. Препоръчителни имена:
+   - `hero-1.jpg`, `hero-2.jpg` — големи снимки за началната карта и горната част на страницата;
+   - `gallery-1.jpg`, `gallery-2.jpg` — снимки за галерията на детайлната страница.
+3. Формати: `.jpg`, `.png` или `.webp`. Снимките трябва да са с добро качество, но не прекалено големи (до ~500 KB всяка е разумен ориентир).
+
+В YAML файла пътят винаги започва с `/images/...`, например:
+
+```yaml
+thumbnails:
+  - /images/trips/italy/hero-1.jpg
+```
+
+---
+
+### Как да редактирате съществуваща екскурзия
+
+1. Отворете съответния файл в `data/trips/` (напр. `albania-coast.yaml`).
+2. Променете текста, цените или датите.
+3. Запазете файла и качете промяната в GitHub.
+
+**Смяна на цена или наличност:** намерете секцията `dates` и променете `price` или `available`:
+
+```yaml
+dates:
+  - date: 2026-07-15
+    price: 450
+    available: true    # true = има места, false = изчерпано
+```
+
+**Маркиране като изчерпано:** сложете `available: false` на съответната дата.
+
+---
+
+### Как да добавите нова екскурзия (стъпка по стъпка)
+
+#### Стъпка 1 — Име на файла
+
+Създайте нов файл в `data/trips/` с кратко име на латиница, малки букви, думи разделени с тире:
+
+```
+data/trips/italy-amalfi.yaml
+```
+
+Това име става адресът на страницата: `.../trips/italy-amalfi`
+
+#### Стъпка 2 — Копирайте шаблон
+
+Най-лесно е да **копирате** съществуващ файл (напр. `albania-coast.yaml`), да го преименувате и да смените съдържанието.
+
+#### Стъпка 3 — Попълнете полетата
+
+```yaml
+name: Амалфитанско крайбрежие
+description: >
+  Кратко описание на екскурзията. Може да е на няколко реда.
+  Знакът ">" позволява текст на няколко реда без допълнително форматиране.
+country: italy
+duration: 7 дни
+category:
+  - плаж
+  - лято
+thumbnails:
+  - /images/trips/italy/hero-1.jpg
+  - /images/trips/italy/hero-2.jpg
+dates:
+  - date: 2026-06-10
+    price: 520
+    available: true
+gallery:
+  - /images/trips/italy/gallery-1.jpg
+  - /images/trips/italy/gallery-2.jpg
+itinerary:
+  - day: 1
+    title: Пристигане
+    description: Трансфер до хотела.
+  - day: 2
+    title: Разходка по крайбрежието
+    description: ...
+included:
+  - name: Настаняване (6 нощи)
+    price: 0
+excluded:
+  - name: Застраховка
+    price: 35
+```
+
+#### Стъпка 4 — Качете снимките
+
+Вижте секцията [Как да добавите снимки](#как-да-добавите-снимки) по-горе.
+
+#### Стъпка 5 — Публикувайте
+
+Запазете файла и го качете в GitHub заедно със снимките. След малко сайтът ще покаже новата екскурзия на началната страница.
+
+---
+
+### Обяснение на полетата
+
+| Поле | Задължително | Какво да напишете |
+|------|:---:|-------------------|
+| `name` | да | Заглавие на екскурзията (както се показва на сайта) |
+| `description` | да | По-дълъг текст с описание |
+| `country` | да | Държава на латиница, напр. `albania`, `greece`, `croatia`, `czech-republic`. Използва се за филтъра „Държава" на началната страница |
+| `duration` | не | Продължителност, напр. `7 дни` |
+| `category` | не | Етикети (плаж, семейно, лято и т.н.) — показват се като значки |
+| `thumbnails` | да | Поне една снимка; ако са повече, се въртят автоматично |
+| `dates` | да | Поне една дата с цена и наличност |
+| `dates[].date` | да | Дата във формат `ГГГГ-ММ-ДД`, напр. `2026-07-15` |
+| `dates[].price` | да | Цена в евро (само число, без €) |
+| `dates[].available` | да | `true` = има места, `false` = изчерпано |
+| `gallery` | не | Снимки за галерията на детайлната страница |
+| `itinerary` | не | Ден по ден маршрут (`day`, `title`, `description`) |
+| `included` | не | Какво е включено в цената; `price: 0` означава „включено" |
+| `excluded` | не | Какво не е включено; тук `price` е допълнителна такса |
+
+**Как се изчислява цената на картата:** сайтът показва цената и датата на **най-близкото бъдещо заминаване**, за което `available` е `true`.
+
+---
+
+### Важни правила при писане
+
+Тези файлове са във формат **YAML**. Малка грешка в подреждането може да счупи сайта при обновяване.
+
+1. **Използвайте интервали, не Tab.** Всяко ниво е отместено с **2 интервала**.
+2. **Двоеточие и интервал:** пишете `name: Стойност`, не `name:Стойност`.
+3. **Списъци** започват с тире и интервал:
+   ```yaml
+   category:
+     - плаж
+     - лято
+   ```
+4. **Дати** винаги като `2026-07-15` (година-месец-ден).
+5. **Цени** — само число: `450`, не `450 €` или `450,00`.
+6. **Пътища към снимки** започват с `/images/...`.
+7. **Не изтривайте** двоеточията, тиретата и кавичките от шаблона — сменяйте само стойностите след тях.
+8. Ако не сте сигурни, **копирайте работещ файл** и променяйте постепенно.
+
+---
+
+### Как да публикувате промените в GitHub
+
+Ако работите **директно в браузъра** на github.com:
+
+1. Отворете файла (или създайте нов с *Add file → Create new file*).
+2. Натиснете иконата молив (*Edit*), направете промените.
+3. Скролнете надолу, напишете кратко описание (напр. „Добавена екскурзия Италия").
+4. Натиснете **Commit changes**.
+
+Сайтът се обновява автоматично след всеки commit в основния клон (`main`). Ако не виждате промяната веднага, изчакайте 1–2 минути и презаредете страницата с Ctrl+F5.
+
+Ако не сте сигурни как да качите файлове в GitHub, помолете технически човек от екипа да ви помогне при първото качване.
+
+---
+
+### Често срещани въпроси
+
+**Трябва ли да инсталирам нещо на компютъра?**  
+Не, ако редактирате през GitHub в браузъра. Инсталацията е нужна само за програмисти, които тестват локално.
+
+**Мога ли да изтрия екскурзия?**  
+Да — изтрийте YAML файла от `data/trips/` (и по желание снимките ѝ). След публикуване екскурзията изчезва от сайта.
+
+**Защо новата държава не се показва правилно на филтъра?**  
+Проверете `country` — трябва да е на латиница, малки букви, напр. `italy`, не `Италия`. Ако държавата е нова за сайта, може да се наложи програмист да добави превод на името ѝ в кода.
+
+**Снимката не се вижда.**  
+Проверете дали файлът наистина е в `public/images/...` и дали пътят в YAML съвпада точно (включително главни/малки букви и разширението `.jpg` vs `.JPG`).
+
+---
+
+## За програмисти
+
+```bash
+npm install
+npm run dev      # локален сървър за разработка
+npm run build    # статичен build в dist/
+npm run preview  # преглед на production build
+```
+
+Пълни изисквания и схема на данните: [`docs/requirements.md`](docs/requirements.md).
+
+Деплой: GitHub Actions публикува `dist/` в GitHub Pages при push в `main`.
