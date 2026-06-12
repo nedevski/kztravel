@@ -60,4 +60,6 @@ export const ui = {
   mainNav: 'Основна навигация',
   navTrips: 'Ваканции',
   navContact: 'Контакти',
+  openMenu: 'Отвори меню',
+  closeMenu: 'Затвори меню',
 } as const

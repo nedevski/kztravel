@@ -1,13 +1,13 @@
 import { ui } from '@/lib/strings'
 import { useTheme } from '@/lib/theme'
 
-export function ThemeToggle() {
+export function ThemeToggle({ className }: { className?: string }) {
   const { theme, toggleTheme } = useTheme()
 
   return (
     <button
       type="button"
-      className="theme-toggle"
+      className={className ? `theme-toggle ${className}` : 'theme-toggle'}
       onClick={toggleTheme}
       aria-label={theme === 'light' ? ui.switchToDark : ui.switchToLight}
       title={theme === 'light' ? ui.darkMode : ui.lightMode}
