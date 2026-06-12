@@ -72,7 +72,11 @@ export function Layout() {
         <Outlet />
       </main>
       <footer className="site-footer">
-        <p>&copy; {new Date().getFullYear()} {siteSettings.title}</p>
+        <p>
+          свидетелство за регистрация на туроператор номер РК-00-00000
+          <br />
+          ФИРМА ЕООД &copy; {new Date().getFullYear()} Всички права запазени.
+        </p>
       </footer>
     </div>
   )
