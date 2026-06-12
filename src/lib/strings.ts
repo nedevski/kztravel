@@ -57,4 +57,7 @@ export const ui = {
   switchToLight: 'Превключи на светъл режим',
   darkMode: 'Тъмен режим',
   lightMode: 'Светъл режим',
+  mainNav: 'Основна навигация',
+  navTrips: 'Ваканции',
+  navContact: 'Контакти',
 } as const

@@ -31,7 +31,7 @@ export function Contact() {
 
         <section className="contact__details">
           <div className="contact__row">
-            <div className="contact__item">
+            <div className="contact__item contact__card">
               <span className="contact__label">{ui.contactPhone}</span>
               <a
                 className="contact__value"
@@ -40,7 +40,7 @@ export function Contact() {
                 {contact.phone}
               </a>
             </div>
-            <div className="contact__item">
+            <div className="contact__item contact__card">
               <span className="contact__label">{ui.contactEmail}</span>
               <a
                 className="contact__value"
@@ -52,7 +52,7 @@ export function Contact() {
           </div>
         </section>
 
-        <section className="contact__map-section">
+        <section className="contact__map-section contact__card">
           <div className="contact__item">
             <span className="contact__label">{ui.contactOffice}</span>
             <p className="contact__map-label">{contact.address}</p>

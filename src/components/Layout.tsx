@@ -1,5 +1,7 @@
 import { useEffect, type CSSProperties } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import { HeaderContact } from '@/components/HeaderContact'
+import { HeaderNav } from '@/components/HeaderNav'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { siteSettings } from '@/lib/loadData'
 
@@ -26,11 +28,12 @@ export function Layout() {
   return (
     <div className="site" style={bgStyle}>
       <header className="site-header">
-        <div className="site-header__spacer" aria-hidden="true" />
         <Link to="/" className="site-header__brand">
           {siteSettings.title}
         </Link>
-        <div className="site-header__actions">
+        <HeaderNav />
+        <div className="site-header__end">
+          <HeaderContact />
           <ThemeToggle />
         </div>
       </header>

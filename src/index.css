@@ -117,6 +117,7 @@ button {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
+  gap: 1rem;
   padding: 1.5rem 1.5rem;
   border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(12px);
@@ -126,14 +127,100 @@ button {
   z-index: 100;
 }
 
-.site-header__spacer {
-  min-width: 0;
+.site-header__brand {
+  justify-self: start;
+  font-size: clamp(1.25rem, 3.5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  transition: color 0.2s;
 }
 
-.site-header__actions {
+.site-header__brand:hover {
+  color: var(--color-accent-hover);
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.site-header__nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--color-chip-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.site-header__nav-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.site-header__nav-link--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.site-header__nav-link--active:hover {
+  color: var(--color-on-accent);
+}
+
+.site-header__end {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 1rem;
+  min-width: 0;
+  justify-self: end;
+}
+
+.site-header__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  min-width: 0;
+  font-size: clamp(0.65rem, 1.6vw, 0.8rem);
+  line-height: 1.35;
+  color: var(--color-text-muted);
+  text-align: left;
+}
+
+.site-header__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  min-width: 0;
+  transition: color 0.2s;
+}
+
+a.site-header__contact-item:hover {
+  color: var(--color-accent);
+}
+
+.site-header__contact-item--static {
+  cursor: default;
+}
+
+.site-header__contact-icon {
+  flex-shrink: 0;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin-top: 0.12em;
+  color: var(--color-accent);
+}
+
+.site-header__contact-item span {
   min-width: 0;
 }
 
@@ -166,19 +253,6 @@ button {
 .theme-toggle__icon {
   width: 1.15rem;
   height: 1.15rem;
-}
-
-.site-header__brand {
-  font-size: clamp(1.75rem, 5vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  transition: color 0.2s;
-}
-
-.site-header__brand:hover {
-  color: var(--color-accent-hover);
 }
 
 .site-main {
@@ -580,19 +654,28 @@ button {
 .contact__details {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
   text-align: center;
 }
 
 .contact__row {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
   width: 100%;
-  max-width: 52rem;
-  gap: 2rem;
+  gap: 1.25rem;
+}
+
+.contact__card {
+  background: var(--color-table-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem 2rem;
+}
+
+.contact__row .contact__card {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .contact__item {
@@ -627,7 +710,7 @@ a.contact__value:hover {
 .contact__map-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
 }
 
