@@ -1,4 +1,5 @@
 import { formatLabel, formatPrice } from './formatters'
+import { tripHasActiveDiscount } from './tripUtils'
 import type { FilterIndex, PriceRange, Trip, TripFilters } from './types'
 
 export function getTripFilterPrice(trip: Trip): number | null {
@@ -85,10 +86,11 @@ export function buildFilterIndex(trips: Trip[]): FilterIndex {
     showCategoryFilter: categories.length > 0,
     showDurationFilter: durations.length > 1,
     showPriceFilter: priceRanges.length > 1,
+    showDiscountFilter: trips.some(tripHasActiveDiscount),
   }
 }
 
-export type FilterDimension = 'country' | 'price' | 'duration' | 'category'
+export type FilterDimension = 'country' | 'price' | 'duration' | 'category' | 'discount'
 
 export function getFilterPool(
   trips: Trip[],
@@ -109,6 +111,9 @@ export function getFilterPool(
       break
     case 'category':
       partial.categories = []
+      break
+    case 'discount':
+      partial.discountedOnly = false
       break
   }
 
@@ -137,6 +142,8 @@ export function filterTrips(trips: Trip[], filters: TripFilters): Trip[] {
       if (!priceInRange(price, filters.priceRange)) return false
     }
 
+    if (filters.discountedOnly && !tripHasActiveDiscount(trip)) return false
+
     return true
   })
 }
@@ -153,12 +160,14 @@ export function parseFiltersFromSearch(
   const priceRange = priceId
     ? (priceRanges.find((range) => range.id === priceId) ?? null)
     : null
+  const discountedOnly = params.get('discount') === '1'
 
   return {
     country,
     categories,
     durations,
     priceRange,
+    discountedOnly,
   }
 }
 
@@ -181,6 +190,10 @@ export function buildFilterParams(filters: Partial<TripFilters>): URLSearchParam
     params.set('price', filters.priceRange.id)
   }
 
+  if (filters.discountedOnly) {
+    params.set('discount', '1')
+  }
+
   return params
 }
 
@@ -194,7 +207,8 @@ export function hasActiveFilters(filters: TripFilters): boolean {
     filters.country !== null ||
     filters.categories.length > 0 ||
     filters.durations.length > 0 ||
-    filters.priceRange !== null
+    filters.priceRange !== null ||
+    filters.discountedOnly
   )
 }
 
@@ -203,4 +217,5 @@ export const emptyFilters: TripFilters = {
   categories: [],
   durations: [],
   priceRange: null,
+  discountedOnly: false,
 }

@@ -3,6 +3,25 @@ export interface ContactInfo {
   email: string
   address: string
   mapEmbedUrl: string
+  workingHours: string[]
+  bankDetails: BankDetails
+}
+
+export interface BankDetails {
+  bankName: string
+  iban: string
+  holder: string
+}
+
+export interface BookingSection {
+  title: string
+  items: string[]
+}
+
+export interface BookingInfo {
+  title: string
+  intro: string
+  sections: BookingSection[]
 }
 
 export interface SiteFooter {
@@ -92,6 +111,7 @@ export interface TripFilters {
   categories: string[]
   durations: string[]
   priceRange: PriceRange | null
+  discountedOnly: boolean
 }
 
 export interface FilterIndex {
@@ -103,4 +123,5 @@ export interface FilterIndex {
   showCategoryFilter: boolean
   showDurationFilter: boolean
   showPriceFilter: boolean
+  showDiscountFilter: boolean
 }

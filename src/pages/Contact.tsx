@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import { PageTitle } from '@/components/PageTitle'
 import { getTripBySlug, siteSettings } from '@/lib/loadData'
-import { ui } from '@/lib/strings'
+import { ui, weekdayLabels } from '@/lib/strings'
 
 export function Contact() {
   const [searchParams] = useSearchParams()
@@ -27,6 +27,9 @@ export function Contact() {
           {trip && (
             <p className="contact__trip">{ui.contactTripInquiry(trip.name)}</p>
           )}
+          <p className="contact__booking-link">
+            <Link to="/booking">{ui.contactBookingLink} →</Link>
+          </p>
         </header>
 
         <section className="contact__details">
@@ -48,6 +51,35 @@ export function Contact() {
               >
                 {contact.email}
               </a>
+            </div>
+          </div>
+          <div className="contact__row">
+            <div className="contact__item contact__card">
+              <span className="contact__label">{ui.contactWorkingHours}</span>
+              <dl className="contact__hours">
+                {weekdayLabels.map((day, index) => (
+                  <div key={day} className="contact__hours-row">
+                    <dt>{day}</dt>
+                    <dd>{contact.workingHours[index]}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <div className="contact__item contact__card">
+              <dl className="contact__bank">
+                <div className="contact__bank-row">
+                  <dt>{ui.contactBankName}</dt>
+                  <dd>{contact.bankDetails.bankName}</dd>
+                </div>
+                <div className="contact__bank-row">
+                  <dt>{ui.contactIban}</dt>
+                  <dd>{contact.bankDetails.iban}</dd>
+                </div>
+                <div className="contact__bank-row">
+                  <dt>{ui.contactAccountHolder}</dt>
+                  <dd>{contact.bankDetails.holder}</dd>
+                </div>
+              </dl>
             </div>
           </div>
         </section>

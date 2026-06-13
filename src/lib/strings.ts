@@ -1,3 +1,13 @@
+export const weekdayLabels = [
+  'Понеделник',
+  'Вторник',
+  'Сряда',
+  'Четвъртък',
+  'Петък',
+  'Събота',
+  'Неделя',
+] as const
+
 export const countryLabels: Record<string, string> = {
   bulgaria: 'България',
   greece: 'Гърция',
@@ -19,6 +29,7 @@ export const ui = {
   filterByDuration: 'Филтрирай по продължителност',
   filterCategory: 'Категория',
   filterByCategory: 'Филтрирай по категория',
+  filterDiscount: 'Оферти',
   filtersHeading: 'Филтри',
   all: 'Всички',
   fullyBooked: 'Напълно заета',
@@ -31,6 +42,11 @@ export const ui = {
   contactPhone: 'Телефон',
   contactEmail: 'Имейл',
   contactOffice: 'Или ни посетете в нашия офис',
+  contactWorkingHours: 'Работно време',
+  contactBankName: 'Банка',
+  contactIban: 'IBAN',
+  contactAccountHolder: 'Титуляр',
+  contactBookingLink: 'Условия за записване',
   contactTripInquiry: (tripName: string) => `Запитване за: ${tripName}`,
   moreDates: (count: number) =>
     count === 1 ? '(+ още 1 дата)' : `(+ още ${count} дати)`,
@@ -67,6 +83,8 @@ export const ui = {
   mainNav: 'Основна навигация',
   navTrips: 'Ваканции',
   navContact: 'Контакти',
+  navBooking: 'Как да резервирам',
+  suggestedTrips: (country: string) => `Още от ${country}`,
   openMenu: 'Отвори меню',
   closeMenu: 'Затвори меню',
 } as const

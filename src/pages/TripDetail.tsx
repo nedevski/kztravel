@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { DatesTable } from '@/components/DatesTable'
 import { Gallery } from '@/components/Gallery'
@@ -5,14 +6,24 @@ import { InclusionList } from '@/components/InclusionList'
 import { Itinerary } from '@/components/Itinerary'
 import { PageTitle } from '@/components/PageTitle'
 import { Slideshow } from '@/components/Slideshow'
+import { TripCard } from '@/components/TripCard'
 import { formatCountryLabel, formatLabel } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
 import { buildFilterParams, emptyFilters } from '@/lib/filters'
-import { getTripBySlug } from '@/lib/loadData'
+import { getTripBySlug, trips } from '@/lib/loadData'
+import { pickRandomTrips } from '@/lib/tripUtils'
 
 export function TripDetail() {
   const { slug } = useParams<{ slug: string }>()
   const trip = slug ? getTripBySlug(slug) : undefined
+
+  const suggestedTrips = useMemo(() => {
+    if (!trip) return []
+    const sameCountry = trips.filter(
+      (candidate) => candidate.country === trip.country && candidate.slug !== trip.slug,
+    )
+    return pickRandomTrips(sameCountry, 3)
+  }, [trip])
 
   if (!trip) {
     return <Navigate to="/" replace />
@@ -97,6 +108,17 @@ export function TripDetail() {
           <section className="trip-detail__section">
             <h2>{ui.notIncluded}</h2>
             <InclusionList items={trip.excluded} variant="excluded" />
+          </section>
+        )}
+
+        {suggestedTrips.length > 0 && (
+          <section className="trip-detail__section trip-detail__suggestions">
+            <h2>{ui.suggestedTrips(formatCountryLabel(trip.country))}</h2>
+            <div className="trip-grid">
+              {suggestedTrips.map((suggested) => (
+                <TripCard key={suggested.slug} trip={suggested} />
+              ))}
+            </div>
           </section>
         )}
 

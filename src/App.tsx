@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from '@/components/Layout'
 import { Contact } from '@/pages/Contact'
+import { Booking } from '@/pages/Booking'
 import { Home } from '@/pages/Home'
 import { TripDetail } from '@/pages/TripDetail'
 import { ThemeProvider } from '@/lib/theme'
@@ -14,6 +15,7 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="trips/:slug" element={<TripDetail />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="booking" element={<Booking />} />
           </Route>
         </Routes>
       </BrowserRouter>

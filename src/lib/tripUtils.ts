@@ -76,6 +76,41 @@ export function getNextAvailableDate(dates: TripDate[]): TripDate | null {
   return getUpcomingBookableDates(dates)[0] ?? null
 }
 
+/** Effective price for comparison — discounted when set, otherwise regular. */
+export function getEffectiveDatePrice(date: TripDate): number {
+  return date.discountedPrice ?? date.price
+}
+
+/**
+ * Among upcoming bookable dates, pick the one with the lowest effective price.
+ * e.g. turkey-istanbul: Apr €420, Sep €399 discounted → returns Sep date (€399).
+ */
+export function getLowestBookableDate(dates: TripDate[]): TripDate | null {
+  const upcoming = getUpcomingBookableDates(dates)
+  if (upcoming.length === 0) return null
+  return upcoming.reduce((lowest, current) =>
+    getEffectiveDatePrice(current) < getEffectiveDatePrice(lowest) ? current : lowest,
+  )
+}
+
+export function tripHasActiveDiscount(trip: Pick<Trip, 'dates'>): boolean {
+  return getUpcomingBookableDates(trip.dates).some(
+    (date) =>
+      date.discountedPrice != null &&
+      date.discountedPrice > 0 &&
+      date.discountedPrice < date.price,
+  )
+}
+
+export function pickRandomTrips(trips: Trip[], count: number): Trip[] {
+  const shuffled = [...trips]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled.slice(0, count)
+}
+
 export function isFullyBooked(dates: TripDate[]): boolean {
   return getNextAvailableDate(dates) === null
 }
@@ -84,8 +119,10 @@ export function enrichTrip(slug: string, data: TripYaml): Trip {
   const dates = data.dates.map(normalizeDate)
   const upcomingBookable = getUpcomingBookableDates(dates)
   const nextDate = upcomingBookable[0] ?? null
+  const lowestDate = getLowestBookableDate(dates)
   const ended = isTripEnded(dates)
   const lastDate = ended ? getMostRecentDate(dates) : null
+  const priceDate = lowestDate ?? lastDate
   return {
     ...data,
     dates,
@@ -97,10 +134,10 @@ export function enrichTrip(slug: string, data: TripYaml): Trip {
     excluded: data.excluded ?? [],
     nextDate,
     lastDate,
-    displayPrice: nextDate?.price ?? lastDate?.price ?? null,
-    displayPriceBgn: nextDate?.priceBgn ?? lastDate?.priceBgn ?? null,
-    displayDiscountedPrice: nextDate?.discountedPrice ?? lastDate?.discountedPrice ?? null,
-    displayDiscountedPriceBgn: nextDate?.discountedPriceBgn ?? lastDate?.discountedPriceBgn ?? null,
+    displayPrice: priceDate?.price ?? null,
+    displayPriceBgn: priceDate?.priceBgn ?? null,
+    displayDiscountedPrice: priceDate?.discountedPrice ?? null,
+    displayDiscountedPriceBgn: priceDate?.discountedPriceBgn ?? null,
     ended,
     fullyBooked: !ended && nextDate === null,
     moreAvailableDates: getAdditionalBookableDateCount(dates),

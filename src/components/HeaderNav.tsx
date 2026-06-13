@@ -22,6 +22,12 @@ export function HeaderNav() {
       >
         {ui.navContact}
       </Link>
+      <Link
+        to="/booking"
+        className={`site-header__nav-link${pathname === '/booking' ? ' site-header__nav-link--active' : ''}`}
+      >
+        {ui.navBooking}
+      </Link>
     </nav>
   )
 }

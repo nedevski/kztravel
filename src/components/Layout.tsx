@@ -77,6 +77,11 @@ export function Layout() {
           <br />
           {siteSettings.footer.company} &copy; {new Date().getFullYear()} Всички права запазени.
         </p>
+        <p className="site-footer__links">
+          <Link to="/booking">{ui.navBooking}</Link>
+          <span aria-hidden="true"> · </span>
+          <Link to="/contact">{ui.navContact}</Link>
+        </p>
       </footer>
     </div>
   )

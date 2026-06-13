@@ -3,6 +3,7 @@
   --color-bg: #fff8f0;
   --color-surface: rgba(255, 248, 240, 0.88);
   --color-surface-solid: #fff5e8;
+  --color-card-bg: #fff;
   --color-text: #1a1208;
   --color-text-muted: #4a3828;
   --color-accent: #e07a3a;
@@ -29,6 +30,7 @@
   --color-bg: #1f1610;
   --color-surface: rgba(42, 30, 22, 0.88);
   --color-surface-solid: #2a1f17;
+  --color-card-bg: color-mix(in srgb, var(--color-surface-solid) 72%, #3a2b1f);
   --color-text: #f5e6d3;
   --color-text-muted: #c4a882;
   --color-accent: #f4a261;
@@ -56,6 +58,29 @@
 html {
   font-size: 19.2px;
   -webkit-font-smoothing: antialiased;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background 0.35s ease,
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    fill 0.35s ease,
+    stroke 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition: none !important;
+  }
 }
 
 body {
@@ -145,35 +170,28 @@ button {
 .site-header__nav {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
 .site-header__nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 0.45rem 1rem;
-  border: 1px solid var(--color-chip-border);
-  border-radius: 999px;
-  background: transparent;
+  padding: 0.25rem 0;
   color: var(--color-text);
   font-size: 0.9rem;
   font-weight: 600;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
 }
 
 .site-header__nav-link:hover {
-  border-color: var(--color-accent);
   color: var(--color-accent);
 }
 
 .site-header__nav-link--active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-on-accent);
-}
-
-.site-header__nav-link--active:hover {
-  color: var(--color-on-accent);
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
 }
 
 .site-header__end {
@@ -334,10 +352,23 @@ a.site-header__contact-item:hover {
   .site-header__nav {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.35rem;
   }
 
   .site-header__nav-link {
     justify-content: center;
+    padding: 0.5rem 0.75rem;
+    border-bottom: none;
+    border-radius: 0.375rem;
+  }
+
+  .site-header__nav-link--active {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .site-header__nav-link--active:hover {
+    color: var(--color-on-accent);
   }
 
   .site-header__end {
@@ -374,6 +405,18 @@ a.site-header__contact-item:hover {
   border-top: 1px solid var(--color-border);
 }
 
+.site-footer__links {
+  margin: 0.75rem 0 0;
+}
+
+.site-footer__links a {
+  color: var(--color-accent);
+}
+
+.site-footer__links a:hover {
+  color: var(--color-accent-hover);
+}
+
 /* Home */
 
 .home__intro {
@@ -399,7 +442,7 @@ a.site-header__contact-item:hover {
 .filter-box {
   margin-bottom: 2rem;
   padding: 1.125rem 1.25rem 1.25rem;
-  background: var(--color-surface-solid);
+  background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -444,11 +487,37 @@ a.site-header__contact-item:hover {
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.2;
+  min-height: 2.25rem;
+  max-width: 100%;
   transition:
     background 0.15s,
     border-color 0.15s,
     color 0.15s,
     box-shadow 0.15s;
+}
+
+.filter-box__trigger-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-box__trigger-label--short {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.filter-box__trigger-label--full {
+  display: inline;
+}
+
+.filter-box__trigger-dot {
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--color-accent);
 }
 
 .filter-box__trigger:hover {
@@ -559,6 +628,14 @@ a.site-header__contact-item:hover {
   .filter-box__panel-wrap {
     grid-column: 1 / -1;
     grid-row: 3;
+  }
+
+  .filter-box__trigger-label--short {
+    display: inline-flex;
+  }
+
+  .filter-box__trigger-label--full {
+    display: none;
   }
 }
 
@@ -692,7 +769,7 @@ a.site-header__contact-item:hover {
   flex-direction: column;
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--color-surface-solid);
+  background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -862,6 +939,13 @@ a.site-header__contact-item:hover {
   width: 100%;
   height: 100%;
   background: var(--color-surface-solid);
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+
+.slideshow:active {
+  cursor: grabbing;
 }
 
 .slideshow__img {
@@ -1017,6 +1101,10 @@ a.site-header__contact-item:hover {
   min-width: 0;
 }
 
+.contact__row .contact__card:has(.contact__bank) {
+  justify-content: center;
+}
+
 .contact__item {
   display: flex;
   flex-direction: column;
@@ -1044,6 +1132,75 @@ a.contact__value {
 
 a.contact__value:hover {
   color: var(--color-accent-hover);
+}
+
+.contact__booking-link {
+  margin: 0.75rem 0 0;
+  font-size: 0.95rem;
+}
+
+.contact__booking-link a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.contact__booking-link a:hover {
+  color: var(--color-accent-hover);
+}
+
+.contact__bank {
+  margin: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.contact__hours {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.contact__hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.contact__hours-row dt {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.contact__hours-row dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+}
+
+.contact__bank-row {
+  display: grid;
+  gap: 0;
+}
+
+.contact__bank-row dt {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.contact__bank-row dd {
+  margin: 0;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
 .contact__map-section {
@@ -1094,6 +1251,70 @@ a.contact__value:hover {
   }
 }
 
+/* Booking */
+
+.booking__back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--color-accent);
+  font-size: 0.9rem;
+}
+
+.booking__back:hover {
+  color: var(--color-accent-hover);
+}
+
+.booking__header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.booking__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+}
+
+.booking__intro {
+  margin: 0 auto;
+  max-width: 42rem;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.booking__section {
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.booking__section-title {
+  margin: 0 0 0.875rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.booking__list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+  line-height: 1.55;
+}
+
+.booking__cta {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.trip-detail__suggestions .trip-grid {
+  margin-top: 1rem;
+}
+
 /* Trip detail */
 
 .trip-detail__back {
@@ -1116,7 +1337,6 @@ a.contact__value:hover {
   flex-direction: column;
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--color-surface-solid);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow);
 }
@@ -1142,6 +1362,11 @@ a.contact__value:hover {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  background: #fff;
+}
+
+[data-theme='dark'] .trip-detail__hero-body {
+  background: var(--color-card-bg);
 }
 
 .trip-detail__hero-bar {
@@ -1715,7 +1940,7 @@ a.contact__value:hover {
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  background: var(--color-surface);
+  background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
 }

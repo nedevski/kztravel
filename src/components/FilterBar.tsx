@@ -72,13 +72,15 @@ function FilterChevron({ open }: { open: boolean }) {
 }
 
 function FilterTrigger({
-  label,
+  shortLabel,
+  fullLabel,
   isOpen,
   isActive,
   isDisabled,
   onClick,
 }: {
-  label: string
+  shortLabel: string
+  fullLabel: string
   isOpen: boolean
   isActive: boolean
   isDisabled: boolean
@@ -92,7 +94,11 @@ function FilterTrigger({
       disabled={isDisabled}
       onClick={onClick}
     >
-      <span>{label}</span>
+      <span className="filter-box__trigger-label filter-box__trigger-label--short">
+        {shortLabel}
+        {isActive && <span className="filter-box__trigger-dot" aria-hidden="true" />}
+      </span>
+      <span className="filter-box__trigger-label filter-box__trigger-label--full">{fullLabel}</span>
       <FilterChevron open={isOpen} />
     </button>
   )
@@ -151,21 +157,25 @@ export function FilterBar({
     onFiltersChange({ ...filters, priceRange })
   }
 
-  const countryLabel =
+  const toggleDiscountedOnly = () => {
+    onFiltersChange({ ...filters, discountedOnly: !filters.discountedOnly })
+  }
+
+  const countryFullLabel =
     filters.country !== null
       ? `${ui.filterCountry}: ${formatCountryLabel(filters.country)}`
       : ui.filterCountry
 
-  const priceLabel = filters.priceRange
+  const priceFullLabel = filters.priceRange
     ? `${ui.filterPrice}: ${filters.priceRange.label}`
     : ui.filterPrice
 
-  const durationLabel =
+  const durationFullLabel =
     filters.durations.length > 0
       ? `${ui.filterDuration} (${filters.durations.length})`
       : ui.filterDuration
 
-  const categoryLabel =
+  const categoryFullLabel =
     filters.categories.length > 0
       ? `${ui.filterCategory} (${filters.categories.length})`
       : ui.filterCategory
@@ -183,7 +193,8 @@ export function FilterBar({
         <div className="filter-box__triggers">
           {filterIndex.showCountryFilter && (
             <FilterTrigger
-              label={countryLabel}
+              shortLabel={ui.filterCountry}
+              fullLabel={countryFullLabel}
               isOpen={openPanel === 'country'}
               isActive={filters.country !== null}
               isDisabled={isPoolEmpty}
@@ -193,7 +204,8 @@ export function FilterBar({
 
           {filterIndex.showPriceFilter && (
             <FilterTrigger
-              label={priceLabel}
+              shortLabel={ui.filterPrice}
+              fullLabel={priceFullLabel}
               isOpen={openPanel === 'price'}
               isActive={filters.priceRange !== null}
               isDisabled={isPoolEmpty}
@@ -203,7 +215,8 @@ export function FilterBar({
 
           {filterIndex.showDurationFilter && (
             <FilterTrigger
-              label={durationLabel}
+              shortLabel={ui.filterDuration}
+              fullLabel={durationFullLabel}
               isOpen={openPanel === 'duration'}
               isActive={filters.durations.length > 0}
               isDisabled={isPoolEmpty}
@@ -213,12 +226,25 @@ export function FilterBar({
 
           {filterIndex.showCategoryFilter && (
             <FilterTrigger
-              label={categoryLabel}
+              shortLabel={ui.filterCategory}
+              fullLabel={categoryFullLabel}
               isOpen={openPanel === 'category'}
               isActive={filters.categories.length > 0}
               isDisabled={isPoolEmpty}
               onClick={() => togglePanel('category')}
             />
+          )}
+
+          {filterIndex.showDiscountFilter && (
+            <button
+              type="button"
+              className={`filter-box__trigger filter-box__discount${filters.discountedOnly ? ' filter-box__trigger--active' : ''}${isPoolEmpty ? ' filter-box__trigger--disabled' : ''}`}
+              disabled={isPoolEmpty}
+              aria-pressed={filters.discountedOnly}
+              onClick={toggleDiscountedOnly}
+            >
+              <span className="filter-box__trigger-label">{ui.filterDiscount}</span>
+            </button>
           )}
         </div>
 
