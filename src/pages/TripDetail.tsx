@@ -27,36 +27,40 @@ export function TripDetail() {
         </Link>
 
         <header className="trip-detail__hero">
-          <Slideshow
-            images={trip.thumbnails}
-            alt={trip.name}
-            className="trip-detail__slideshow"
-          />
-          <div className="trip-detail__hero-bar">
-            <div className="trip-detail__badges">
-              <Link
-                to={`/${buildFilterSearch({ country: trip.country })}`}
-                className="badge badge--country badge--link"
-              >
-                {formatCountryLabel(trip.country)}
-              </Link>
-              {trip.category.map((cat) => (
-                <span key={cat} className="badge badge--category">
-                  {formatLabel(cat)}
-                </span>
-              ))}
+          <h1 className="trip-detail__title">{trip.name}</h1>
+          <div className="trip-detail__hero-card">
+            <Slideshow
+              images={trip.thumbnails}
+              alt={trip.name}
+              className="trip-detail__slideshow"
+            />
+            <div className="trip-detail__hero-body">
+              <div className="trip-detail__hero-bar">
+                <div className="trip-detail__badges">
+                  <Link
+                    to={`/${buildFilterSearch({ country: trip.country })}`}
+                    className="badge badge--country badge--link"
+                  >
+                    {formatCountryLabel(trip.country)}
+                  </Link>
+                  {trip.duration && (
+                    <span className="badge badge--duration">{trip.duration}</span>
+                  )}
+                  {trip.category.map((cat) => (
+                    <span key={cat} className="badge badge--category">
+                      {formatLabel(cat)}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  to={`/contact?trip=${trip.slug}`}
+                  className="btn btn--primary trip-detail__cta"
+                >
+                  {ui.bookNow}
+                </Link>
+              </div>
+              <p className="trip-detail__description">{trip.description}</p>
             </div>
-            <Link
-              to={`/contact?trip=${trip.slug}`}
-              className="btn btn--primary trip-detail__cta"
-            >
-              {ui.bookNow}
-            </Link>
-          </div>
-          <div className="trip-detail__hero-content">
-            <h1 className="trip-detail__title">{trip.name}</h1>
-            {trip.duration && <p className="trip-detail__duration">{trip.duration}</p>}
-            <p className="trip-detail__description">{trip.description}</p>
           </div>
         </header>
 

@@ -48,9 +48,10 @@ export const ui = {
   item: 'Услуга',
   price: 'Цена',
   status: 'Статус',
-  available: 'Налично',
+  available: 'Налична',
   lastSpots: 'Последни места',
   soldOut: 'Изчерпано',
+  completed: 'Приключила',
   viewPhoto: (index: number, total: number) =>
     `Преглед на снимка ${index} от ${total}`,
   photoGallery: (tripName: string) => `Галерия със снимки от ${tripName}`,

@@ -88,6 +88,7 @@ button {
   display: flex;
   flex-direction: column;
   position: relative;
+  --page-padding-x: 1.5rem;
 }
 
 .site::before {
@@ -118,7 +119,7 @@ button {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem 1.5rem;
+  padding: 1.5rem var(--page-padding-x);
   border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(12px);
   background: var(--color-header-bg);
@@ -268,6 +269,10 @@ a.site-header__contact-item:hover {
 }
 
 @media (max-width: 767px) {
+  .site {
+    --page-padding-x: 0.45rem;
+  }
+
   .site-header {
     grid-template-columns: 1fr auto;
   }
@@ -357,12 +362,12 @@ a.site-header__contact-item:hover {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  --main-padding-x: 1.5rem;
+  --main-padding-x: var(--page-padding-x);
   padding: 2rem var(--main-padding-x) 3rem;
 }
 
 .site-footer {
-  padding: 1.5rem;
+  padding: 1.5rem var(--page-padding-x);
   text-align: center;
   color: var(--color-text-muted);
   font-size: 0.875rem;
@@ -690,6 +695,16 @@ a.site-header__contact-item:hover {
   color: white;
 }
 
+.trip-card--ended .trip-card__price-chip {
+  background: var(--color-badge-muted-bg);
+  color: var(--color-text-muted);
+  box-shadow: none;
+}
+
+.trip-card--ended .trip-card__date {
+  color: var(--color-text-muted);
+}
+
 .trip-card__pricing {
   display: flex;
   flex-direction: column;
@@ -753,6 +768,15 @@ a.site-header__contact-item:hover {
   letter-spacing: 0.03em;
   background: var(--color-badge-muted-bg);
   color: var(--color-text-muted);
+}
+
+.badge--duration {
+  padding: 0.15rem 0.4rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.03em;
+  background: var(--color-table-bg);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
 }
 
 .badge--link:hover {
@@ -1045,20 +1069,37 @@ a.contact__value:hover {
   margin-bottom: 2.5rem;
 }
 
-.trip-detail__slideshow {
-  aspect-ratio: 21 / 9;
+.trip-detail__hero-card {
+  display: flex;
+  flex-direction: column;
   border-radius: var(--radius);
   overflow: hidden;
-  margin-bottom: 1rem;
+  background: var(--color-surface-solid);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
 }
 
 @media (max-width: 639px) {
-  .trip-detail__slideshow {
+  .trip-detail__hero-card {
     width: calc(100% + 2 * var(--main-padding-x));
     margin-left: calc(-1 * var(--main-padding-x));
     margin-right: calc(-1 * var(--main-padding-x));
     border-radius: 0;
+    border-left: none;
+    border-right: none;
   }
+}
+
+.trip-detail__slideshow {
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+}
+
+.trip-detail__hero-body {
+  padding: 1rem 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .trip-detail__hero-bar {
@@ -1066,15 +1107,10 @@ a.contact__value:hover {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 0.75rem;
 }
 
 .trip-detail__cta {
   flex-shrink: 0;
-}
-
-.trip-detail__hero-content {
-  width: 100%;
 }
 
 .trip-detail__badges {
@@ -1090,20 +1126,15 @@ a.contact__value:hover {
 }
 
 .trip-detail__title {
-  margin: 0 0 0.75rem;
+  margin: 0 0 1rem;
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-}
-
-.trip-detail__duration {
-  margin: -0.5rem 0 0.75rem;
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
+  text-align: left;
 }
 
 .trip-detail__description {
-  margin: 0 0 1rem;
+  margin: 0;
   color: var(--color-text-muted);
   font-size: 1.05rem;
   line-height: 1.7;
@@ -1183,6 +1214,7 @@ a.contact__value:hover {
   margin: 0 0 1rem;
   font-size: 1.35rem;
   font-weight: 600;
+  text-align: center;
 }
 
 /* Dates table */
@@ -1192,6 +1224,10 @@ a.contact__value:hover {
   overflow-x: auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
+}
+
+.dates-table__mobile {
+  display: none;
 }
 
 .dates-table table,
@@ -1233,8 +1269,20 @@ a.contact__value:hover {
   border-bottom: 1px solid var(--color-border);
 }
 
+.dates-table td {
+  font-size: 1rem;
+}
+
 .dates-table td:first-child {
   font-weight: 700;
+}
+
+.dates-table .price-display,
+.dates-table .price-display__original,
+.dates-table .price-display__current,
+.dates-table .status-chip,
+.dates-table__completed {
+  font-size: inherit;
 }
 
 .dates-table__unavailable td {
@@ -1243,6 +1291,104 @@ a.contact__value:hover {
 
 .dates-table__unavailable td:last-child {
   opacity: 1;
+}
+
+.dates-table__past td {
+  color: var(--color-text-muted);
+  opacity: 0.65;
+}
+
+.dates-table__completed {
+  font-weight: 700;
+}
+
+@media (max-width: 639px) {
+  .dates-table {
+    overflow-x: visible;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .dates-table__desktop {
+    display: none;
+  }
+
+  .dates-table__mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+    background: transparent;
+  }
+
+  .dates-table__card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .dates-table__card-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .dates-table__card-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dates-table__card-status .status-chip,
+  .dates-table__card-status .dates-table__completed {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .dates-table__card-date {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .dates-table__card-price {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  .dates-table__card-price .price-display {
+    align-items: flex-end;
+  }
+
+  .dates-table__card.dates-table__unavailable .dates-table__card-date,
+  .dates-table__card.dates-table__unavailable .dates-table__card-price {
+    opacity: 0.5;
+  }
+
+  .dates-table__card.dates-table__unavailable .dates-table__card-status {
+    opacity: 1;
+  }
+
+  .dates-table__card.dates-table__past {
+    color: var(--color-text-muted);
+    opacity: 0.65;
+  }
+
+  .dates-table__card.dates-table__past .dates-table__card-status {
+    opacity: 1;
+  }
 }
 
 .status-chip {

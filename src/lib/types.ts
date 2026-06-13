@@ -21,6 +21,8 @@ export interface TripDate {
   discountedPrice?: number
   discountedPriceBgn?: number
   status: TripDateStatus
+  /** @deprecated Use `status: soldout` instead */
+  available?: boolean
 }
 
 export interface ItineraryDay {
@@ -57,10 +59,12 @@ export interface Trip extends Omit<TripYaml, 'category' | 'gallery' | 'itinerary
   included: InclusionItem[]
   excluded: InclusionItem[]
   nextDate: TripDate | null
+  lastDate: TripDate | null
   displayPrice: number | null
   displayPriceBgn: number | null
   displayDiscountedPrice: number | null
   displayDiscountedPriceBgn: number | null
+  ended: boolean
   fullyBooked: boolean
   moreAvailableDates: number
 }

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { PriceDisplay } from '@/components/PriceDisplay'
 import { formatCountryLabel, formatDate, formatLabel } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
+import { getAdditionalBookableDateCount } from '@/lib/tripUtils'
 import type { Trip } from '@/lib/types'
 import { Slideshow } from './Slideshow'
 
@@ -11,9 +12,15 @@ interface TripCardProps {
 
 export function TripCard({ trip }: TripCardProps) {
   const visibleCategories = trip.category.slice(0, 2)
+  const additionalDates = getAdditionalBookableDateCount(trip.dates)
+
+  const displayDate = trip.ended ? trip.lastDate : trip.nextDate
 
   return (
-    <Link to={`/trips/${trip.slug}`} className="trip-card">
+    <Link
+      to={`/trips/${trip.slug}`}
+      className={`trip-card${trip.ended ? ' trip-card--ended' : ''}`}
+    >
       <div className="trip-card__media">
         <Slideshow images={trip.thumbnails} alt={trip.name} className="trip-card__slideshow" />
         {trip.fullyBooked && (
@@ -47,14 +54,14 @@ export function TripCard({ trip }: TripCardProps) {
               )}
             </span>
           </div>
-          {!trip.fullyBooked && (
+          {!trip.fullyBooked && displayDate && (
             <div className="trip-card__date-group">
-              {trip.moreAvailableDates > 0 && (
+              {!trip.ended && additionalDates > 0 && (
                 <span className="trip-card__more">
-                  {ui.moreDates(trip.moreAvailableDates)}
+                  {ui.moreDates(additionalDates)}
                 </span>
               )}
-              <span className="trip-card__date">{formatDate(trip.nextDate!.date)}</span>
+              <span className="trip-card__date">{formatDate(displayDate.date)}</span>
             </div>
           )}
         </div>
