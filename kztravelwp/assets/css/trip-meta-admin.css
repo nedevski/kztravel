@@ -1,0 +1,62 @@
+.kztravel-trip-meta__section {
+	margin-top: 1.5em;
+	padding-top: 1.25em;
+	border-top: 1px solid #dcdcde;
+}
+
+.kztravel-trip-meta__section-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 10px;
+}
+
+.kztravel-trip-meta__section-header h3 {
+	margin: 0;
+	font-size: 14px;
+}
+
+.kztravel-trip-meta__table input,
+.kztravel-trip-meta__table select {
+	width: 100%;
+	max-width: 140px;
+}
+
+.kztravel-trip-meta__table th:last-child,
+.kztravel-trip-meta__table td:last-child {
+	width: 36px;
+	text-align: center;
+}
+
+.kztravel-trip-meta__cards {
+	display: grid;
+	gap: 12px;
+}
+
+.kztravel-trip-meta__card {
+	padding: 12px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #fff;
+}
+
+.kztravel-trip-meta__card-grid {
+	display: grid;
+	grid-template-columns: 100px 1fr;
+	gap: 12px;
+}
+
+.kztravel-trip-meta__card label {
+	display: block;
+	margin-bottom: 4px;
+	font-weight: 600;
+}
+
+.kztravel-trip-meta__remove {
+	color: #b32d2e;
+}
+
+.kztravel-trip-meta__template {
+	display: none;
+}

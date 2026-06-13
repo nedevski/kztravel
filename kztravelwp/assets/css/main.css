@@ -1,12 +1,3 @@
-/*
-Theme Name: KZ Travel
-Description: Travel agency catalog theme for KZ Travel.
-Version: 1.0.0
-Requires at least: 6.4
-Requires PHP: 8.1
-Text Domain: kztravel
-*/
-
 :root,
 [data-theme='light'] {
   --color-bg: #fff8f0;
@@ -1993,8 +1984,4 @@ a.contact__value:hover {
 
 .inclusion-table--excluded td:last-child {
   font-weight: 700;
-}
-
-.trip-card--hidden {
-  display: none;
 }
