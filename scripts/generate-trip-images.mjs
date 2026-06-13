@@ -306,13 +306,26 @@ function scene(sceneName) {
   }
 }
 
+function escapeXmlAttr(value) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+}
+
+function escapeXmlText(value) {
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+}
+
 function wrap(title, sceneName, c1, c2, flip, fontSize, labelY) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="${title}">
+  const safeTitle = escapeXmlAttr(title)
+  const label = escapeXmlText(title)
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="${safeTitle}">
   ${defs(c1, c2, flip)}
   ${backdrop()}
   ${scene(sceneName)}
   <rect width="800" height="500" fill="url(#scrim)"/>
-  <text x="400" y="${labelY}" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="${fontSize}" font-weight="600" letter-spacing="0.02em">${title}</text>
+  <text x="400" y="${labelY}" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="${fontSize}" font-weight="600" letter-spacing="0.02em">${label}</text>
 </svg>`
 }
 
