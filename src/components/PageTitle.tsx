@@ -7,7 +7,7 @@ interface PageTitleProps {
 
 export function PageTitle({ title }: PageTitleProps) {
   useEffect(() => {
-    document.title = title ? `${title} — ${siteSettings.title}` : siteSettings.title
+    document.title = title ? `${title} - ${siteSettings.title}` : siteSettings.title
   }, [title])
 
   return null

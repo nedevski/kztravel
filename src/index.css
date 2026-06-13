@@ -837,6 +837,21 @@ a.contact__value:hover {
   border: 0;
 }
 
+@media (max-width: 639px) {
+  .contact__row {
+    flex-direction: column;
+  }
+
+  .contact__row .contact__card {
+    flex: none;
+    width: 100%;
+  }
+
+  .contact__value {
+    overflow-wrap: anywhere;
+  }
+}
+
 /* Trip detail */
 
 .trip-detail__back {

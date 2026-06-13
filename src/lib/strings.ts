@@ -21,7 +21,7 @@ export const ui = {
   bookNow: 'Запази сега',
   contactPageTitle: 'Контакти',
   contactHeading: 'Свържете се с нас',
-  contactIntro: 'Обадете се или ни пишете — ще ви помогнем да изберете дата и да запазите място.',
+  contactIntro: 'Обадете се или ни пишете - ще ви помогнем да изберете дата и да запазите място.',
   contactPhone: 'Телефон',
   contactEmail: 'Имейл',
   contactOffice: 'Или ни посетете в нашия офис',

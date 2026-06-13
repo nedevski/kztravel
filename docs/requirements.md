@@ -1,4 +1,4 @@
-# KZ Travel — Project Requirements
+# KZ Travel - Project Requirements
 
 > **Status:** Draft for review  
 > **Purpose:** Define scope and structure before implementation.
@@ -7,7 +7,7 @@
 
 ## 1. Overview
 
-Build a **static travel agency website** for a small catalog of trips (initially **3–6 vacations**). The site is content-driven: all trip data lives in YAML files, and the app is built into static HTML/CSS/JS for free hosting on **GitHub Pages**.
+Build a **static travel agency website** for a small catalog of trips (initially **3-6 vacations**). The site is content-driven: all trip data lives in YAML files, and the app is built into static HTML/CSS/JS for free hosting on **GitHub Pages**.
 
 ### Goals
 
@@ -22,7 +22,7 @@ Build a **static travel agency website** for a small catalog of trips (initially
 - Admin UI or CMS
 - Full-text search or multi-language support
 - Payment integration
-- Category filtering on the landing page (deferred — `category` is display-only for now)
+- Category filtering on the landing page (deferred - `category` is display-only for now)
 
 ---
 
@@ -72,11 +72,11 @@ Clicking a card navigates to that trip’s detail page.
 
 **Filtering:** Above the trip grid, show controls to narrow the list:
 
-- **Country filter** — select one country, or “All” (see §4.3)
+- **Country filter** - select one country, or “All” (see §4.3)
 
 Filtering is **client-side** on the landing page (no server, no extra routes required for v1). Selected filters are reflected in the URL query string (e.g. `?country=albania`) so filtered views are shareable.
 
-**Layout:** Classic magazine view — visual-first cards with strong imagery, title overlay or below image, price and date clearly visible. Responsive grid (e.g. 1 column mobile, 2–3 columns desktop). Empty state when no trips match the active filters.
+**Layout:** Classic magazine view - visual-first cards with strong imagery, title overlay or below image, price and date clearly visible. Responsive grid (e.g. 1 column mobile, 2-3 columns desktop). Empty state when no trips match the active filters.
 
 **Global chrome:** Site title (browser tab / header), favicon, and optional full-page background image come from global settings (see §4.1).
 
@@ -110,8 +110,8 @@ data/
     ...
 ```
 
-- **`data/site.yaml`** — site-wide settings (title, favicon, background, etc.). Loaded once at build time and applied across all pages.
-- **`data/trips/*.yaml`** — one file per vacation.
+- **`data/site.yaml`** - site-wide settings (title, favicon, background, etc.). Loaded once at build time and applied across all pages.
+- **`data/trips/*.yaml`** - one file per vacation.
 - Trip filename becomes the trip identifier/slug (kebab-case recommended).
 - Images referenced by path (e.g. relative to `public/` or bundled assets folder).
 
@@ -125,7 +125,7 @@ background: /images/bg.jpg       # Optional full-page or landing background imag
 
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
-| `title` | string | yes | Appended to page titles (e.g. `Albania Coast — KZ Travel`) |
+| `title` | string | yes | Appended to page titles (e.g. `Albania Coast - KZ Travel`) |
 | `favicon` | string | yes | Path to `.ico`, `.png`, or `.svg` in `public/` |
 | `background` | string | no | Site-wide background; omit for solid/default background |
 
@@ -136,7 +136,7 @@ Additional global fields (contact email, logo, tagline, etc.) can be added to th
 ```yaml
 # Required
 name: string                    # Display title
-description: string             # Short or long intro text (markdown optional — TBD)
+description: string             # Short or long intro text (markdown optional - TBD)
 
 country: albania                # Destination country (single value; drives the country filter)
 category:                       # Trip type and attribute labels (display-only in v1)
@@ -215,27 +215,27 @@ excluded:                       # Not covered; optional extras or out-of-pocket
 
 - **Next date:** smallest `dates[].date` where `available === true` and `date >= today`.
 - **Display price on landing card:** `price` from that next available date.
-- **Fallback:** If no upcoming available dates, show “Contact us” or last known price (behavior TBD — see open questions).
+- **Fallback:** If no upcoming available dates, show “Contact us” or last known price (behavior TBD - see open questions).
 - **Filter index:** unique sorted list of all `country` values across trips, used to populate landing-page country filter controls.
 
 ---
 
 ## 5. UI / UX Requirements
 
-### Landing page — filters
+### Landing page - filters
 
-- **Country control:** Buttons, tabs, or dropdown — one active country at a time plus “All”.
+- **Country control:** Buttons, tabs, or dropdown - one active country at a time plus “All”.
 - **Category filter:** Not implemented in v1; `category` values are shown as badges only.
 - **Counts (optional):** Show number of trips per country when space allows.
 - **Clear filters:** One action to reset to “All”.
 
-### Landing page — trip card
+### Landing page - trip card
 
-- **Thumbnail slideshow:** If `thumbnails.length > 1`, auto-advance through images (interval TBD, e.g. 4–5 seconds). Single image: static, no controls needed.
+- **Thumbnail slideshow:** If `thumbnails.length > 1`, auto-advance through images (interval TBD, e.g. 4-5 seconds). Single image: static, no controls needed.
 - **Price:** Formatted with currency symbol (e.g. `€450`).
 - **Next date:** Formatted for locale (e.g. `15 Jul 2026`).
 - **Unavailable trips:** Still listed if YAML exists; card may show “Fully booked” when no available future dates (TBD).
-- **Country / category:** Show country and optionally 1–2 category badges on the card; full category list on detail page.
+- **Country / category:** Show country and optionally 1-2 category badges on the card; full category list on detail page.
 
 ### Trip detail page
 
@@ -255,7 +255,7 @@ excluded:                       # Not covered; optional extras or out-of-pocket
 ### General
 
 - Mobile-first responsive layout
-- Accessible images (`alt` text — from filename or optional `alt` field in YAML later)
+- Accessible images (`alt` text - from filename or optional `alt` field in YAML later)
 - Fast load: optimized static assets, lazy-load gallery if needed
 
 ---
@@ -308,7 +308,7 @@ kztravel/
 
 ## 8. Example content
 
-See schemas in §4.2 and §4.3. At launch, seed **`site.yaml`** plus **3–6 sample trip YAML files** with placeholder copy and images so the layout can be reviewed end-to-end.
+See schemas in §4.2 and §4.3. At launch, seed **`site.yaml`** plus **3-6 sample trip YAML files** with placeholder copy and images so the layout can be reviewed end-to-end.
 
 ---
 
@@ -319,7 +319,7 @@ See schemas in §4.2 and §4.3. At launch, seed **`site.yaml`** plus **3–6 sam
 3. **No upcoming dates:** What should the landing card show for price/date?
 4. **Description format:** Plain text only, or Markdown on detail page?
 5. **Booking CTA:** Email link, phone number, external form, or none on detail page?
-6. **Site branding beyond `site.yaml`:** Logo, tagline, footer contact info — add to global settings now or later?
+6. **Site branding beyond `site.yaml`:** Logo, tagline, footer contact info - add to global settings now or later?
 7. **Background image:** Full-page fixed backdrop on all pages, or landing page only?
 8. **Image paths:** Store under `public/images/...` only, or support external URLs?
 9. **Custom domain:** Exact domain name (for `CNAME` and optional canonical URLs in meta tags)?
