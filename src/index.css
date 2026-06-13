@@ -550,6 +550,22 @@ a.site-header__contact-item:hover {
   opacity: 1;
 }
 
+.filter-box__panel--category {
+  gap: 0.35rem;
+}
+
+.filter-box__panel--category .chip {
+  padding: 0.22rem 0.5rem;
+  font-size: 0.6875rem;
+  gap: 0.3rem;
+}
+
+.filter-box__panel--category .chip__count {
+  min-width: 1.1rem;
+  padding: 0.05rem 0.25rem;
+  font-size: 0.6rem;
+}
+
 .chip {
   display: inline-flex;
   align-items: center;
@@ -712,8 +728,8 @@ a.site-header__contact-item:hover {
 
 .trip-card__badges {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
+  flex-wrap: nowrap;
+  gap: 0.3rem;
 }
 
 .badge {
@@ -732,6 +748,9 @@ a.site-header__contact-item:hover {
 }
 
 .badge--category {
+  padding: 0.15rem 0.4rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.03em;
   background: var(--color-badge-muted-bg);
   color: var(--color-text-muted);
 }
@@ -1060,8 +1079,14 @@ a.contact__value:hover {
 
 .trip-detail__badges {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  flex-wrap: nowrap;
+  gap: 0.3rem;
+}
+
+@media (max-width: 639px) {
+  .trip-detail__badges {
+    flex-wrap: wrap;
+  }
 }
 
 .trip-detail__title {
@@ -1266,10 +1291,30 @@ a.contact__value:hover {
   display: flex;
   gap: 0.75rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   min-width: 0;
+}
+
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .gallery {
+    cursor: grab;
+    touch-action: pan-x;
+  }
+
+  .gallery--dragging {
+    cursor: grabbing;
+  }
+
+  .gallery--dragging .gallery__thumb {
+    pointer-events: none;
+  }
 }
 
 .gallery-carousel--paginated .gallery {
@@ -1278,7 +1323,6 @@ a.contact__value:hover {
 
 .gallery__thumb {
   flex: 0 0 min(82%, 18rem);
-  scroll-snap-align: start;
 }
 
 @media (min-width: 1024px) {
@@ -1286,7 +1330,6 @@ a.contact__value:hover {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     overflow: visible;
-    scroll-snap-type: none;
   }
 
   .gallery__thumb {
@@ -1360,6 +1403,8 @@ a.contact__value:hover {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--radius);
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .gallery-lightbox {

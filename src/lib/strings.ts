@@ -1,9 +1,7 @@
 export const countryLabels: Record<string, string> = {
-  albania: 'Албания',
-  austria: 'Австрия',
-  croatia: 'Хърватия',
-  'czech-republic': 'Чехия',
+  bulgaria: 'България',
   greece: 'Гърция',
+  turkey: 'Турция',
 }
 
 export const ui = {

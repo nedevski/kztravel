@@ -1,0 +1,57 @@
+name: Одрин на пазар
+description: >
+  Двудневна екскурзия до Одрин - султанските джамии, Капи куле и легендарният
+  пазар с подправки, сладки и занаятчийски стоки. Идеален уикенд за шопинг
+  и културно откриване на съседна Турция.
+country: turkey
+duration: 2 дни
+category:
+  - екскурзия
+  - пазар
+  - уикенд
+  - с-водач
+thumbnails:
+  - /images/trips/turkey-edirne/hero-1.svg
+  - /images/trips/turkey-edirne/hero-2.svg
+dates:
+  - date: 2026-04-18
+    price: 145
+    priceBgn: 284
+    status: available
+  - date: 2026-05-16
+    price: 145
+    priceBgn: 284
+    status: available
+  - date: 2026-09-19
+    price: 155
+    priceBgn: 303
+    status: lastSpots
+gallery:
+  - /images/trips/turkey-edirne/gallery-1.svg
+  - /images/trips/turkey-edirne/gallery-2.svg
+  - /images/trips/turkey-edirne/gallery-3.svg
+itinerary:
+  - day: 1
+    title: Одрин - джамии и пазар
+    description: >
+      Пристигане и настаняване. Обиколка на Селимие джамия, Стария базар и
+      пазарът с подправки. Свободно време за пазаруване и дегустация на локум.
+  - day: 2
+    title: Капи куле и отпътуване
+    description: >
+      Посещение на Капи куле и моста на Мехмед II. Обяд с кебапче и трансфер
+      обратно към България.
+included:
+  - name: Настаняване в хотел (1 нощ)
+    price: 0
+  - name: Закуска
+    price: 0
+  - name: Трансфер от/до Казанлък
+    price: 0
+  - name: Обиколка с водач (джамии, пазар, Капи куле)
+    price: 0
+excluded:
+  - name: Обяд и вечеря
+    price: 0
+  - name: Лични покупки на пазара
+    price: 0

@@ -318,7 +318,11 @@ export function FilterBar({
         )}
 
         {openPanel === 'category' && !isPoolEmpty && (
-          <div className="filter-box__panel" role="group" aria-label={ui.filterByCategory}>
+          <div
+            className="filter-box__panel filter-box__panel--category"
+            role="group"
+            aria-label={ui.filterByCategory}
+          >
             {filterIndex.categories.map((category) => {
               const count = countByCategory(categoryPool, category)
               if (count === 0) return null

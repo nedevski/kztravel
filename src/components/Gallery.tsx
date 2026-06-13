@@ -1,8 +1,13 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { imageAltFromPath } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
 
 const IMAGES_PER_PAGE = 6
+const DRAG_THRESHOLD_PX = 4
+
+function isGalleryScrollable(el: HTMLElement) {
+  return el.scrollWidth > el.clientWidth
+}
 
 interface GalleryProps {
   images: string[]
@@ -12,6 +17,9 @@ interface GalleryProps {
 export function Gallery({ images, tripName }: GalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [pageStart, setPageStart] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const galleryRef = useRef<HTMLDivElement>(null)
+  const suppressClickRef = useRef(false)
 
   const close = useCallback(() => setActiveIndex(null), [])
 
@@ -52,6 +60,80 @@ export function Gallery({ images, tripName }: GalleryProps) {
     setPageStart(0)
   }, [images])
 
+  useEffect(() => {
+    const gallery = galleryRef.current
+    if (!gallery) return
+
+    const onWheel = (e: WheelEvent) => {
+      if (!isGalleryScrollable(gallery)) return
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return
+
+      e.preventDefault()
+      gallery.scrollLeft += e.deltaY
+    }
+
+    gallery.addEventListener('wheel', onWheel, { passive: false })
+    return () => gallery.removeEventListener('wheel', onWheel)
+  }, [images])
+
+  const onGalleryPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const gallery = galleryRef.current
+    if (
+      !gallery ||
+      e.pointerType !== 'mouse' ||
+      e.button !== 0 ||
+      !isGalleryScrollable(gallery)
+    ) {
+      return
+    }
+
+    const pointerId = e.pointerId
+    const startX = e.clientX
+    const startScrollLeft = gallery.scrollLeft
+    let moved = false
+
+    const onPointerMove = (moveEvent: PointerEvent) => {
+      if (moveEvent.pointerId !== pointerId) return
+
+      const deltaX = moveEvent.clientX - startX
+      if (!moved && Math.abs(deltaX) <= DRAG_THRESHOLD_PX) return
+
+      if (!moved) {
+        moved = true
+        setIsDragging(true)
+      }
+
+      moveEvent.preventDefault()
+      gallery.scrollLeft = startScrollLeft - deltaX
+    }
+
+    const onPointerEnd = (endEvent: PointerEvent) => {
+      if (endEvent.pointerId !== pointerId) return
+
+      document.removeEventListener('pointermove', onPointerMove)
+      document.removeEventListener('pointerup', onPointerEnd)
+      document.removeEventListener('pointercancel', onPointerEnd)
+
+      if (moved) {
+        suppressClickRef.current = true
+        window.setTimeout(() => {
+          suppressClickRef.current = false
+        }, 0)
+      }
+
+      setIsDragging(false)
+    }
+
+    document.addEventListener('pointermove', onPointerMove)
+    document.addEventListener('pointerup', onPointerEnd)
+    document.addEventListener('pointercancel', onPointerEnd)
+  }
+
+  const openPhoto = (index: number) => {
+    if (suppressClickRef.current) return
+    setActiveIndex(index)
+  }
+
   if (images.length === 0) return null
 
   const activeSrc = activeIndex !== null ? images[activeIndex] : null
@@ -87,7 +169,11 @@ export function Gallery({ images, tripName }: GalleryProps) {
           </button>
         )}
 
-        <div className="gallery">
+        <div
+          ref={galleryRef}
+          className={`gallery${isDragging ? ' gallery--dragging' : ''}`}
+          onPointerDown={onGalleryPointerDown}
+        >
           {images.map((src, i) => (
             <button
               key={src}
@@ -95,7 +181,7 @@ export function Gallery({ images, tripName }: GalleryProps) {
               className={`gallery__thumb${
                 !isThumbVisibleOnDesktop(i) ? ' gallery__thumb--desktop-hidden' : ''
               }`}
-              onClick={() => setActiveIndex(i)}
+              onClick={() => openPhoto(i)}
               aria-label={ui.viewPhoto(i + 1, images.length)}
               tabIndex={isThumbVisibleOnDesktop(i) ? 0 : -1}
               aria-hidden={!isThumbVisibleOnDesktop(i)}
@@ -105,6 +191,7 @@ export function Gallery({ images, tripName }: GalleryProps) {
                 alt={imageAltFromPath(src, tripName)}
                 className="gallery__img"
                 loading="lazy"
+                draggable={false}
               />
             </button>
           ))}

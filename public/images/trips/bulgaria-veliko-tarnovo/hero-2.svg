@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Велико Търново">
+  <defs>
+    <linearGradient id="bg" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#7c2d12"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <text x="400" y="235" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="36" font-weight="700">Велико Търново</text>
+  <text x="400" y="280" text-anchor="middle" fill="#ffffff" opacity="0.9" font-family="system-ui,sans-serif" font-size="20">и Трявна · 3 дни</text>
+</svg>
