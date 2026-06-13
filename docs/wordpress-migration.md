@@ -203,7 +203,7 @@ Create a sibling folder in the repo (keeps WP separate from the old static app):
 
 ```
 kztravel/
-  wordpress-theme/           ← new theme (deploy this folder)
+  kztravelwp/           ← new theme (deploy this folder)
     style.css                ← theme header comment + main CSS
     functions.php
     index.php
