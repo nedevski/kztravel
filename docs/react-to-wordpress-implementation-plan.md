@@ -13,7 +13,7 @@
 3. [Architecture decisions](#3-architecture-decisions)
 4. [Prerequisites](#4-prerequisites)
 5. [Theme scaffold](#5-phase-0--theme-scaffold)
-6. [Data model (CPT, taxonomies, ACF)](#6-phase-1--data-model)
+6. [Data model (CPT, taxonomies, SCF)](#6-phase-1--data-model)
 7. [Theme settings (site.yaml → admin)](#7-phase-2--theme-settings)
 8. [Port CSS and assets](#8-phase-3--port-css-and-assets)
 9. [PHP business logic](#9-phase-4--php-business-logic)
@@ -38,9 +38,9 @@ The migration is complete when all of the following are true:
 | **URLs** | `/`, `/trips/{slug}`, `/contact`, `/booking` work with pretty permalinks. Slugs match YAML filenames (e.g. `bulgaria-veliko-tarnovo`). |
 | **Trips in admin** | Editors can create/edit trips under **Trips → Add New** without touching code. |
 | **Hero image** | One **Featured Image** per trip (card + detail hero). No multi-image slideshow required in v1. |
-| **Gallery** | Multiple images via ACF Gallery field; rendered as a **simple responsive grid** (one thumbnail per image). No carousel, pagination, or lightbox in v1. |
+| **Gallery** | Multiple images via **SCF Gallery** field; rendered as a **simple responsive grid** (one thumbnail per image). No carousel, pagination, or lightbox in v1. |
 | **Filters** | Client-side filters on the home page; URL query params unchanged (`?country=…&category=…&duration=…&price=…&discount=1`). |
-| **Site settings** | Fields from `site.yaml` that have no native WP equivalent live on an **ACF Options** page (“Site Settings”) in wp-admin. |
+| **Site settings** | Fields from `site.yaml` that have no native WP equivalent live on an **SCF Options** page (“Site Settings”) in wp-admin. |
 | **Dark mode** | Theme toggle persists via `localStorage`; `[data-theme]` CSS works as today. |
 
 ---
@@ -98,14 +98,14 @@ WordPress renders HTML server-side. Vanilla JS only for filters, theme toggle, a
 
 Use hierarchical `false` for both. Term slugs should match YAML values (`bulgaria`, `култура` → sanitize to slug).
 
-`duration` stays as a plain ACF text field (not a taxonomy) — matches YAML `duration: "3 дни"`.
+`duration` stays as a plain SCF text field (not a taxonomy) — matches YAML `duration: "3 дни"`.
 
 ### 3.4 Images
 
 | React field | WordPress v1 |
 |-------------|--------------|
 | `thumbnails[]` (1–N images, slideshow) | **Featured Image only** (first image on import) |
-| `gallery[]` | **ACF Gallery** field `trip_gallery` |
+| `gallery[]` | **SCF Gallery** field `trip_gallery` |
 
 Editors pick images from the **Media Library**. On import, sideload remote/local URLs into attachments.
 
@@ -113,7 +113,7 @@ Editors pick images from the **Media Library**. On import, sideload remote/local
 
 Skip everything in `Gallery.tsx` beyond the thumbnail grid:
 
-- **Do:** `foreach` gallery images → `<button>` or `<a>` with `<img class="gallery__thumb">` inside `<div class="gallery">`
+- **Do:** `foreach` gallery images → `<div class="gallery__thumb">` with `<img class="gallery__img">` inside `<div class="gallery">`
 - **Do not:** carousel nav, desktop pagination (`IMAGES_PER_PAGE`), lightbox, drag-scroll, wheel hijack
 
 Keep existing CSS classes `.gallery`, `.gallery__thumb`, `.gallery__img` so styles from `index.css` apply.
@@ -129,14 +129,13 @@ CSS for `.slideshow` can remain; only one slide is rendered.
 
 ### 3.7 Plugins
 
-| Plugin | Required | Purpose |
-|--------|----------|---------|
-| Advanced Custom Fields (ACF) | Yes | Trip fields, options page, gallery |
-| ACF Pro | Recommended | Repeaters for dates, itinerary, inclusions |
+| Plugin | Slug | Required | Purpose |
+|--------|------|----------|---------|
+| [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) (SCF) | `secure-custom-fields` | Yes | Trip fields, options page, gallery, repeaters |
 
-If ACF Free only: use Meta Box (free repeaters) or flatten dates into a custom table — **prefer ACF Pro** for parity with YAML repeaters.
+**SCF note:** SCF is a WordPress.org fork of ACF and includes former Pro field types (Repeater, Gallery, Options Page). Theme code uses the same `acf_*` API (`acf_add_local_field_group`, `get_field`, `acf-json/`). **Do not** install Advanced Custom Fields or ACF Pro alongside SCF — they conflict.
 
-Optional later: Wordfence, UpdraftPlus, WP Migrate — not needed for local dev.
+Optional later: Simple Lightbox (gallery click-to-expand), Wordfence, UpdraftPlus, WP Migrate — not needed for v1 local dev.
 
 ### 3.8 Theme folder location
 
@@ -159,17 +158,19 @@ Symlink into Local WP: `wp-content/themes/kztravel` → `kztravelwp/` (see `word
 
 1. [Local](https://localwp.com/) site named `kztravel` (PHP 8.2+, MySQL 8).
 2. WordPress installed; permalinks = **Post name**.
-3. ACF (and ACF Pro if available) installed and activated.
+3. **Secure Custom Fields** installed and activated.
 4. Symlink or copy `kztravelwp/` into `wp-content/themes/kztravel`.
 5. `WP_DEBUG` on locally (`wp-config.php`).
 
 **WP-CLI** (from Local site shell):
 
 ```bash
-wp plugin install advanced-custom-fields --activate
+wp plugin install secure-custom-fields --activate
 wp theme activate kztravel
 wp rewrite flush
 ```
+
+**Do not** install `advanced-custom-fields` or ACF Pro when using SCF.
 
 ---
 
@@ -250,7 +251,9 @@ Open site URL — blank page, no PHP fatal errors. Check `wp-content/debug.log`.
 
 ## 6. Phase 1 — Data model
 
-**Objective:** Trip CPT, taxonomies, and ACF field groups defined and version-controlled.
+**Objective:** Trip CPT, taxonomies, and SCF field groups defined and version-controlled.
+
+> **SCF / ACF API:** Field groups are registered via `acf_add_local_field_group()` in `inc/acf-fields.php` and synced to `acf-json/`. SCF reads the same Local JSON format as ACF.
 
 ### Step 1.1 — `inc/post-types.php`
 
@@ -280,14 +283,14 @@ register_post_type( 'trip', [
 
 Flush rewrite rules once after registration (`flush_rewrite_rules` on theme switch only — already handled by WP).
 
-### Step 1.2 — ACF field group: Trip
+### Step 1.2 — SCF field group: Trip
 
-Create in `inc/acf-fields.php` using `acf_add_local_field_group()` **or** build in wp-admin and export to `acf-json/`. Prefer **Local JSON** in `kztravelwp/acf-json/` for Git.
+Create in `inc/acf-fields.php` using `acf_add_local_field_group()` **or** build in wp-admin (under **Secure Custom Fields**) and export to `acf-json/`. Prefer **Local JSON** in `kztravelwp/acf-json/` for Git.
 
 **Field group:** Trip Details  
 **Location:** Post Type == `trip`
 
-| Field name | ACF type | Maps from YAML | Notes |
+| Field name | SCF type | Maps from YAML | Notes |
 |------------|----------|----------------|-------|
 | `trip_duration` | Text | `duration` | e.g. `3 дни` |
 | `trip_dates` | Repeater | `dates[]` | Subfields below |
@@ -314,7 +317,7 @@ Create in `inc/acf-fields.php` using `acf_add_local_field_group()` **or** build 
 **`trip_country` taxonomy** → YAML `country`  
 **`trip_category` taxonomy** → YAML `category[]`
 
-### Step 1.3 — Enable ACF Local JSON
+### Step 1.3 — Enable SCF Local JSON
 
 In `inc/acf-fields.php`:
 
@@ -338,7 +341,7 @@ After saving field groups in admin, confirm JSON files appear in `acf-json/`. Co
 
 ## 7. Phase 2 — Theme settings
 
-**Objective:** Replace `data/site.yaml` with an ACF Options page editable in wp-admin.
+**Objective:** Replace `data/site.yaml` with an SCF Options page editable in wp-admin.
 
 ### Step 2.1 — Register options page
 
@@ -363,7 +366,7 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 
 Map every `site.yaml` field:
 
-| site.yaml | ACF field | Type | Native WP alternative? |
+| site.yaml | SCF field | Type | Native WP alternative? |
 |-----------|-----------|------|------------------------|
 | `title` | `site_title` | Text | Partially — use this for branding in header/`wp_title` filter |
 | `favicon` | `site_favicon` | Image | No — output `<link rel="icon">` in `header.php` |
@@ -396,7 +399,7 @@ function kztravel_get_option( string $key, $default = '' ) {
 React hardcodes `ui.homeHeading` / `ui.homeSubheading` in `strings.ts`. Options:
 
 - **A)** Keep in `inc/strings.php` (matches React — no admin edit)
-- **B)** Add optional ACF fields `home_heading`, `home_subheading` on options page
+- **B)** Add optional SCF fields `home_heading`, `home_subheading` on options page
 
 **Default for v1:** Option A unless product owner wants editable hero text — then B.
 
@@ -543,7 +546,7 @@ Create under `template-parts/`:
 | `trip-card.php` | `TripCard.tsx` | Uses `hero_url` single image; no slideshow |
 | `filter-bar.php` | `FilterBar.tsx` | Server-render filter UI; counts from PHP |
 | `dates-table.php` | `DatesTable.tsx` | Status badges, discounted prices |
-| `gallery.php` | `Gallery.tsx` | **Simplified** — loop only |
+| `gallery.php` | `Gallery.tsx` | **Simplified** — grid loop only |
 | `itinerary.php` | `Itinerary.tsx` | |
 | `inclusion-list.php` | `InclusionList.tsx` | `variant` = included \| excluded |
 | `price-display.php` | `PriceDisplay.tsx` | Chip and table variants |
@@ -574,7 +577,7 @@ if ( empty( $images ) ) return;
 </div>
 ```
 
-Use `<div>` instead of `<button>` since there is no lightbox click handler in v1.
+Use `<div>` instead of `<button>` or `<a>` — no lightbox click handler in v1.
 
 **`template-parts/trip-card.php`:**
 
@@ -709,7 +712,7 @@ wp post create --post_type=page --post_title='Как да резервирам' 
 
 ### Step 12.2 — Booking content
 
-**Option A (recommended):** ACF fields on the Booking page — `booking_intro` (textarea), `booking_sections` repeater (`title`, `items` repeater) — mirrors `booking.yaml`.
+**Option A (recommended):** SCF fields on the Booking page — `booking_intro` (textarea), `booking_sections` repeater (`title`, `items` repeater) — mirrors `booking.yaml`.
 
 **Option B:** Gutenberg block editor content entered manually once.
 
@@ -838,9 +841,9 @@ Strict sequence for an AI agent — complete each phase before the next.
 ```
 Phase 0  Theme scaffold (functions.php, setup, activate)
    ↓
-Phase 1  CPT + taxonomies + Trip ACF fields + acf-json
+Phase 1  CPT + taxonomies + Trip SCF fields + acf-json
    ↓
-Phase 2  Site Settings options page + ACF fields
+Phase 2  Site Settings options page + SCF fields
    ↓
 Phase 3  CSS + assets + header.php + footer.php
    ↓
@@ -850,7 +853,7 @@ Phase 5  Template parts → front-page.php → single-trip.php → pages
    ↓
 Phase 6  filters.js + theme-toggle.js + mobile-menu.js
    ↓
-Phase 7  Create contact/booking pages + booking ACF
+Phase 7  Create contact/booking pages + booking SCF fields
    ↓
 Phase 8  import-content.php + run import + verify all trips
    ↓
@@ -951,7 +954,7 @@ Each `.trip-card` on the home page should expose:
 | Dates / prices | Trip Details → Dates repeater |
 | Country / category | Trip taxonomies meta box |
 | Phone, email, footer | **Site Settings** |
-| Booking page text | **Pages → Booking** (or ACF on page) |
+| Booking page text | **Pages → Booking** (or SCF fields on page) |
 | Contact layout | **Pages → Contact** (data from Site Settings) |
 
 ---

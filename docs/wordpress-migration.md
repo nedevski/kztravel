@@ -70,7 +70,7 @@ If you proceed, the rest of this guide assumes a **classic custom theme** (PHP t
 │                                                         │
 │  Custom Post Type: trip                                 │
 │  Taxonomies: trip_country, trip_category                  │
-│  ACF fields: dates, itinerary, included, excluded, …      │
+│  SCF fields: dates, itinerary, included, excluded, …        │
 │  Options page: site settings (replaces site.yaml)       │
 │  Pages: Contact, Booking (replaces static routes)       │
 │                                                         │
@@ -83,14 +83,14 @@ If you proceed, the rest of this guide assumes a **classic custom theme** (PHP t
 
 **Plugins to plan for (keep the list short):**
 
-| Plugin | Role | Free? |
-|--------|------|-------|
-| [Advanced Custom Fields](https://www.advancedcustomfields.com/) (ACF) | Structured trip fields (dates repeater, itinerary, etc.) | Free tier is enough to start; Pro if you want repeater on free (see note below) |
-| [WP Migrate](https://deliciousbrains.com/wp-migrate-db/) or Duplicator | DB/files sync between local ↔ staging ↔ prod | Duplicator free for basic moves |
-| [Wordfence](https://www.wordfence.com/) or similar | Firewall / brute-force protection | Free tier |
-| UpdraftPlus (or host backups) | Automated backups | Free tier |
+| Plugin | Slug | Role | Free? |
+|--------|------|------|-------|
+| [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) (SCF) | `secure-custom-fields` | Structured trip fields (dates repeater, itinerary, gallery, options page) | Yes |
+| [WP Migrate](https://deliciousbrains.com/wp-migrate-db/) or Duplicator | — | DB/files sync between local ↔ staging ↔ prod | Duplicator free for basic moves |
+| [Wordfence](https://www.wordfence.com/) or similar | — | Firewall / brute-force protection | Free tier |
+| UpdraftPlus (or host backups) | — | Automated backups | Free tier |
 
-> **ACF note:** Repeaters (dates, itinerary rows, inclusion rows) require **ACF Pro** (~$49/year) or an alternative field plugin (Meta Box, Pods). For a trip catalog with nested data, budget for Pro or pick Meta Box (free repeaters).
+> **SCF note:** SCF is a WordPress.org fork of ACF and includes Repeater, Gallery, and Options Page (formerly ACF Pro). Theme code uses the same `acf_*` API. **Do not** install ACF or ACF Pro alongside SCF.
 
 **Do not install** a heavy page builder (Elementor, Divi) for this project — your layout is custom and fixed; a builder adds bloat and fights your CSS.
 
@@ -113,15 +113,15 @@ Set **Settings → Reading → Your homepage displays → A static page** and pi
 
 | Current YAML | WordPress |
 |--------------|-----------|
-| `data/site.yaml` | ACF Options page (`kztravel_settings`) |
-| `data/booking.yaml` | Booking page content + optional ACF fields |
+| `data/site.yaml` | SCF Options page (`kztravel-settings`) |
+| `data/booking.yaml` | Booking page content + optional SCF fields |
 | `data/trips/*.yaml` | `trip` posts (one post per file) |
-| `trip.country` | Taxonomy `trip_country` *or* ACF select |
+| `trip.country` | Taxonomy `trip_country` *or* SCF select |
 | `trip.category[]` | Taxonomy `trip_category` |
-| `trip.dates[]` | ACF Repeater: `date`, `price`, `price_bgn`, `status`, optional discount fields |
-| `trip.itinerary[]` | ACF Repeater: `day`, `title`, `description` |
-| `trip.included[]` / `excluded[]` | ACF Repeater: `name`, `price`, `price_bgn` |
-| `trip.thumbnails[]` / `gallery[]` | ACF Gallery or Media fields |
+| `trip.dates[]` | SCF Repeater: `date`, `price`, `price_bgn`, `status`, optional discount fields |
+| `trip.itinerary[]` | SCF Repeater: `day`, `title`, `description` |
+| `trip.included[]` / `excluded[]` | SCF Repeater: `name`, `price`, `price_bgn` |
+| `trip.thumbnails[]` / `gallery[]` | SCF Gallery or Media fields |
 | `public/images/*` | WordPress Media Library (`wp-content/uploads/`) |
 
 ### Logic to port
@@ -167,7 +167,7 @@ Use **[Local](https://localwp.com/)** (by WP Engine). It gives you `http://kztra
 1. Log in to **wp-admin**.
 2. **Appearance → Themes → Add New** — ignore defaults; symlink or copy your theme into `wp-content/themes/kztravel/`.
 3. Activate **KZ Travel** theme.
-4. Install and activate **ACF** (and ACF Pro if licensed).
+4. Install and activate **Secure Custom Fields** (do not install ACF alongside SCF).
 5. **Settings → Permalinks → Post name** → Save (required for pretty `/trips/slug` URLs).
 
 ### Symlinking the theme (recommended during dev)
@@ -216,7 +216,7 @@ kztravel/
     inc/
       setup.php              ← theme supports, menus, enqueue scripts
       post-types.php         ← register trip CPT + taxonomies
-      acf-fields.php         ← ACF field groups (PHP export or JSON in acf-json/)
+      acf-fields.php         ← SCF field groups (PHP export or JSON in acf-json/)
       trip-utils.php         ← enrichTrip port
       formatters.php
       strings.php
@@ -231,8 +231,8 @@ kztravel/
       js/
         filters.js
         theme-toggle.js
-      images/                ← favicon, bg (or use Customizer / ACF options)
-    acf-json/                ← ACF Local JSON (version-controlled field definitions)
+      images/                ← favicon, bg (or use Customizer / SCF options)
+    acf-json/                ← SCF Local JSON (version-controlled field definitions)
 ```
 
 Minimum `style.css` header (required by WordPress):
@@ -281,8 +281,8 @@ Work in this order to avoid rework.
 
 ### Phase 2 — Data model (1–2 days)
 
-- [ ] ACF field groups for trips (all YAML fields)
-- [ ] ACF Options page for `site.yaml` fields (contact, footer, favicon, background)
+- [ ] SCF field groups for trips (all YAML fields)
+- [ ] SCF Options page for `site.yaml` fields (contact, footer, favicon, background)
 - [ ] Booking page fields or block content
 - [ ] Export field groups to `acf-json/` for Git versioning
 
@@ -312,7 +312,7 @@ Work in this order to avoid rework.
 - [ ] Migrate DB + uploads
 - [ ] Smoke test filters, contact page, mobile
 
-**Rough total:** ~2 weeks part-time for one developer, depending on ACF familiarity.
+**Rough total:** ~2 weeks part-time for one developer, depending on SCF familiarity.
 
 ---
 
@@ -342,7 +342,7 @@ Then **delete or disable** the import script on production.
 With only ~10 trips, manual entry in wp-admin is viable:
 
 1. **Trips → Add New**
-2. Fill title, description, ACF repeaters
+2. Fill title, description, SCF repeaters
 3. Set featured image + gallery
 4. Assign country/category terms
 
@@ -396,7 +396,7 @@ wp_reset_postdata();
 
 Port the logic from `src/lib/tripUtils.ts` verbatim in spirit:
 
-- Parse ACF `dates` repeater into an array
+- Parse SCF `dates` repeater into an array
 - Compute `nextDate`, `displayPrice`, `ended`, `fullyBooked`, `moreAvailableDates`
 - Return a plain PHP array/stdClass consumed by templates
 
@@ -432,7 +432,7 @@ Document this for the agency staff replacing the README YAML section.
 | Add a trip | **Trips → Add New** |
 | Change prices/dates | Edit trip → **Dates** repeater |
 | Upload photos | **Gallery** field or Media Library |
-| Change phone/email | **Site Settings** (ACF Options) |
+| Change phone/email | **Site Settings** (SCF Options) |
 | Edit booking info | **Pages → Booking** |
 | Change homepage text | **Pages → Home** or theme Customizer |
 
@@ -608,7 +608,7 @@ Local (dev)  →  Staging (staging.yourdomain.com)  →  Production (yourdomain.
 
 - **Pros:** Native WP 6.x approach, block patterns.
 - **Cons:** Your UI is highly custom (filters, trip card slideshow, dates table); fighting blocks may be slower than PHP templates.
-- **Verdict:** Classic theme + ACF is faster for this design.
+- **Verdict:** Classic theme + SCF is faster for this design.
 
 ### Stay on static + Decap CMS / Forestry
 
@@ -656,7 +656,7 @@ Local (dev)  →  Staging (staging.yourdomain.com)  →  Production (yourdomain.
 In Local, open the site → **Open site shell**, then run WP-CLI:
 
 ```bash
-wp plugin install advanced-custom-fields --activate
+wp plugin install secure-custom-fields --activate
 wp theme activate kztravel
 wp rewrite flush
 wp db export kztravel.sql
