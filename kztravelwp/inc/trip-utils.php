@@ -252,10 +252,11 @@ function kztravel_enrich_trip( int $post_id ): array {
 	$itinerary     = array();
 	if ( is_array( $itinerary_raw ) ) {
 		foreach ( $itinerary_raw as $day ) {
+			$body = (string) ( $day['body'] ?? $day['description'] ?? '' );
 			$itinerary[] = array(
 				'day'   => (int) ( $day['day'] ?? 0 ),
 				'title' => $day['title'] ?? '',
-				'body'  => $day['body'] ?? $day['description'] ?? '',
+				'body'  => preg_replace( '/<br\s*\/?>\r?\n?/i', "\n", $body ),
 			);
 		}
 	}

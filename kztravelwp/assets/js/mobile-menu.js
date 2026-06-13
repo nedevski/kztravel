@@ -12,11 +12,6 @@
       header.classList.toggle('site-header--menu-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? toggle.dataset.closeLabel : toggle.dataset.openLabel);
-
-      var openIcon = toggle.querySelector('.site-header__menu-icon--open');
-      var closeIcon = toggle.querySelector('.site-header__menu-icon--close');
-      if (openIcon) openIcon.hidden = open;
-      if (closeIcon) closeIcon.hidden = !open;
     }
 
     toggle.addEventListener('click', function () {

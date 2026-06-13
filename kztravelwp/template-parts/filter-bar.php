@@ -105,6 +105,7 @@ $trips        = $args['trips'] ?? array();
 	</div>
 
 	<div class="filter-box__panel-wrap">
+		<div class="filter-box__panel-clip">
 		<?php if ( ! empty( $filter_index['showCountryFilter'] ) ) : ?>
 			<div class="filter-box__panel" data-panel-content="country" role="group" aria-label="<?php echo esc_attr( kztravel_ui( 'filterByCountry' ) ); ?>" hidden>
 				<button type="button" class="chip" data-filter-country=""><?php echo esc_html( kztravel_ui( 'all' ) ); ?> <span class="chip__count" data-count-for="country-all"></span></button>
@@ -141,7 +142,7 @@ $trips        = $args['trips'] ?? array();
 		<?php endif; ?>
 
 		<?php if ( ! empty( $filter_index['showCategoryFilter'] ) ) : ?>
-			<div class="filter-box__panel filter-box__panel--category" data-panel-content="category" role="group" aria-label="<?php echo esc_attr( kztravel_ui( 'filterByCategory' ) ); ?>" hidden>
+			<div class="filter-box__panel" data-panel-content="category" role="group" aria-label="<?php echo esc_attr( kztravel_ui( 'filterByCategory' ) ); ?>" hidden>
 				<?php foreach ( $filter_index['categories'] as $category ) : ?>
 					<button type="button" class="chip" data-filter-category="<?php echo esc_attr( $category ); ?>">
 						<?php echo esc_html( kztravel_format_label( $category ) ); ?>
@@ -150,6 +151,7 @@ $trips        = $args['trips'] ?? array();
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
+		</div>
 	</div>
 </div>
 

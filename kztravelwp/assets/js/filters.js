@@ -211,6 +211,9 @@
     function updateFilterUI() {
       var filteredCount = filterTrips(trips, filters).length;
       var isPoolEmpty = filteredCount === 0 && hasActiveFilters(filters);
+      var discountPool = getFilterPool(trips, filters, 'discount');
+      var discountCount = discountPool.filter(tripHasActiveDiscount).length;
+      var isDiscountDisabled = discountCount === 0;
 
       filterBar.classList.toggle('filter-box--empty', isPoolEmpty);
 
@@ -221,8 +224,8 @@
         if (trigger.dataset.panel === 'discount') {
           trigger.classList.toggle('filter-box__trigger--active', filters.discountedOnly);
           trigger.setAttribute('aria-pressed', filters.discountedOnly ? 'true' : 'false');
-          trigger.disabled = isPoolEmpty;
-          trigger.classList.toggle('filter-box__trigger--disabled', isPoolEmpty);
+          trigger.disabled = isDiscountDisabled;
+          trigger.classList.toggle('filter-box__trigger--disabled', isDiscountDisabled);
           return;
         }
 
@@ -237,6 +240,10 @@
 
         trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         trigger.classList.toggle('filter-box__trigger--open', isOpen);
+        var chevron = trigger.querySelector('.filter-box__chevron');
+        if (chevron) {
+          chevron.classList.toggle('filter-box__chevron--open', isOpen);
+        }
         setTriggerState(trigger, isActive);
         trigger.disabled = isPoolEmpty;
         trigger.classList.toggle('filter-box__trigger--disabled', isPoolEmpty);
@@ -269,7 +276,40 @@
         panel.hidden = openPanel !== name || isPoolEmpty;
       });
 
+      updateChipStates();
       updateCounts(isPoolEmpty);
+    }
+
+    function updateChipStates() {
+      filterBar.querySelectorAll('[data-filter-country]').forEach(function (chip) {
+        var country = chip.dataset.filterCountry;
+        var isSelected = country ? filters.country === country : filters.country === null;
+        chip.classList.toggle('chip--active', isSelected);
+      });
+
+      filterBar.querySelectorAll('[data-filter-price]').forEach(function (chip) {
+        var priceId = chip.dataset.filterPrice;
+        var isSelected = priceId
+          ? Boolean(filters.priceRange && filters.priceRange.id === priceId)
+          : filters.priceRange === null;
+        chip.classList.toggle('chip--active', isSelected);
+      });
+
+      filterBar.querySelectorAll('[data-filter-duration]').forEach(function (chip) {
+        var days = chip.dataset.filterDuration;
+        chip.classList.toggle('chip--active', filters.durations.includes(days));
+      });
+
+      filterBar.querySelectorAll('[data-filter-category]').forEach(function (chip) {
+        var category = chip.dataset.filterCategory;
+        chip.classList.toggle('chip--active', filters.categories.includes(category));
+      });
+    }
+
+    function setChipVisibility(chip, count) {
+      chip.hidden = count === 0;
+      var countEl = chip.querySelector('.chip__count');
+      if (countEl) countEl.textContent = String(count);
     }
 
     function updateCounts(isPoolEmpty) {
@@ -280,30 +320,33 @@
       var durationPool = getFilterPool(trips, filters, 'duration');
       var categoryPool = getFilterPool(trips, filters, 'category');
 
-      var countEl = filterBar.querySelector('[data-count-for="country-all"]');
-      if (countEl) countEl.textContent = String(countryPool.length);
-
-      (filterIndex.countries || []).forEach(function (country) {
-        var el = filterBar.querySelector('[data-count-for="country-' + country + '"]');
-        if (el) el.textContent = String(countByCountry(countryPool, country));
+      filterBar.querySelectorAll('[data-filter-country]').forEach(function (chip) {
+        var country = chip.dataset.filterCountry;
+        if (!country) {
+          setChipVisibility(chip, countryPool.length);
+          return;
+        }
+        setChipVisibility(chip, countByCountry(countryPool, country));
       });
 
-      var priceAll = filterBar.querySelector('[data-count-for="price-all"]');
-      if (priceAll) priceAll.textContent = String(pricePool.length);
-
-      priceRanges.forEach(function (range) {
-        var el = filterBar.querySelector('[data-count-for="price-' + range.id + '"]');
-        if (el) el.textContent = String(countByPriceRange(pricePool, range));
+      filterBar.querySelectorAll('[data-filter-price]').forEach(function (chip) {
+        var priceId = chip.dataset.filterPrice;
+        if (!priceId) {
+          setChipVisibility(chip, pricePool.length);
+          return;
+        }
+        var range = priceRanges.find(function (item) { return item.id === priceId; });
+        setChipVisibility(chip, range ? countByPriceRange(pricePool, range) : 0);
       });
 
-      (filterIndex.durations || []).forEach(function (duration) {
-        var el = filterBar.querySelector('[data-count-for="duration-' + duration.days + '"]');
-        if (el) el.textContent = String(countByDuration(durationPool, duration.days));
+      filterBar.querySelectorAll('[data-filter-duration]').forEach(function (chip) {
+        var days = chip.dataset.filterDuration;
+        setChipVisibility(chip, countByDuration(durationPool, days));
       });
 
-      (filterIndex.categories || []).forEach(function (category) {
-        var el = filterBar.querySelector('[data-count-for="category-' + category + '"]');
-        if (el) el.textContent = String(countByCategory(categoryPool, category));
+      filterBar.querySelectorAll('[data-filter-category]').forEach(function (chip) {
+        var category = chip.dataset.filterCategory;
+        setChipVisibility(chip, countByCategory(categoryPool, category));
       });
     }
 
@@ -324,6 +367,8 @@
         if (filterBar.classList.contains('filter-box--empty')) return;
 
         if (trigger.dataset.panel === 'discount') {
+          if (trigger.disabled) return;
+          openPanel = null;
           filters.discountedOnly = !filters.discountedOnly;
           applyFilters();
           return;

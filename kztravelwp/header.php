@@ -45,7 +45,7 @@ $favicon = kztravel_get_favicon_url();
 					<path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 					<path d="M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 				</svg>
-				<svg class="site-header__menu-icon site-header__menu-icon--close" viewBox="0 0 24 24" fill="none" aria-hidden="true" hidden>
+				<svg class="site-header__menu-icon site-header__menu-icon--close" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 					<path d="M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 					<path d="M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 				</svg>

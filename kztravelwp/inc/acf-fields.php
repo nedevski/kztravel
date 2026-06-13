@@ -133,7 +133,7 @@ add_action(
 								'name'         => 'body',
 								'type'         => 'textarea',
 								'rows'         => 4,
-								'new_lines'    => 'br',
+								'new_lines'    => '',
 							),
 						),
 					),

@@ -343,6 +343,18 @@ a.site-header__contact-item:hover {
     height: 1.15rem;
   }
 
+  .site-header__menu-icon--close {
+    display: none;
+  }
+
+  .site-header--menu-open .site-header__menu-icon--open {
+    display: none;
+  }
+
+  .site-header--menu-open .site-header__menu-icon--close {
+    display: block;
+  }
+
   .site-header__menu {
     display: none;
     grid-column: 1 / -1;
@@ -1972,6 +1984,7 @@ a.contact__value:hover {
   margin: 0;
   color: var(--color-text-muted);
   font-size: 0.9rem;
+  white-space: pre-line;
 }
 
 /* Inclusion table */
