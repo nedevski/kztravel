@@ -11,8 +11,8 @@ category:
   - уикенд
   - с-водач
 thumbnails:
-  - /images/trips/turkey-edirne/hero-1.svg
-  - /images/trips/turkey-edirne/hero-2.svg
+  - https://images.unsplash.com/photo-1673982081186-dd4e8911e6b9?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1662555025766-2bb053a30e9c?w=1200&h=750&fit=crop&q=85&auto=format
 dates:
   - date: 2026-04-18
     price: 145
@@ -27,9 +27,9 @@ dates:
     priceBgn: 303
     status: lastSpots
 gallery:
-  - /images/trips/turkey-edirne/gallery-1.svg
-  - /images/trips/turkey-edirne/gallery-2.svg
-  - /images/trips/turkey-edirne/gallery-3.svg
+  - https://images.unsplash.com/photo-1771476831143-a0679d72abfa?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1673982081186-dd4e8911e6b9?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1662555025766-2bb053a30e9c?w=1200&h=750&fit=crop&q=85&auto=format
 itinerary:
   - day: 1
     title: Одрин - джамии и пазар

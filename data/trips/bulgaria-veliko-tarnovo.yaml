@@ -11,8 +11,8 @@ category:
   - уикенд
   - с-водач
 thumbnails:
-  - /images/trips/bulgaria-veliko-tarnovo/hero-1.svg
-  - /images/trips/bulgaria-veliko-tarnovo/hero-2.svg
+  - https://images.unsplash.com/photo-1662486644880-dbe1a37cd124?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1665476612000-554febb1a86a?w=1200&h=750&fit=crop&q=85&auto=format
 dates:
   - date: 2026-05-15
     price: 195
@@ -27,9 +27,9 @@ dates:
     priceBgn: 362
     status: lastSpots
 gallery:
-  - /images/trips/bulgaria-veliko-tarnovo/gallery-1.svg
-  - /images/trips/bulgaria-veliko-tarnovo/gallery-2.svg
-  - /images/trips/bulgaria-veliko-tarnovo/gallery-3.svg
+  - https://images.unsplash.com/photo-1662486644880-dbe1a37cd124?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1662965996198-4b0d0e64ca65?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1668013714349-72bf26e967fd?w=1200&h=750&fit=crop&q=85&auto=format
 itinerary:
   - day: 1
     title: Велико Търново

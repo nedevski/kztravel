@@ -10,8 +10,8 @@ category:
   - лято
   - уикенд
 thumbnails:
-  - /images/trips/bulgaria-varna/hero-1.svg
-  - /images/trips/bulgaria-varna/hero-2.svg
+  - https://images.unsplash.com/photo-1674975500529-c037968e6122?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1642485691986-700d98c0abcb?w=1200&h=750&fit=crop&q=85&auto=format
 dates:
   - date: 2026-06-20
     price: 150
@@ -26,9 +26,9 @@ dates:
     priceBgn: 303
     status: available
 gallery:
-  - /images/trips/bulgaria-varna/gallery-1.svg
-  - /images/trips/bulgaria-varna/gallery-2.svg
-  - /images/trips/bulgaria-varna/gallery-3.svg
+  - https://images.unsplash.com/photo-1572381064666-01b80bd6f53f?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1674975500529-c037968e6122?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1642485691986-700d98c0abcb?w=1200&h=750&fit=crop&q=85&auto=format
 itinerary:
   - day: 1
     title: Варна - град и море

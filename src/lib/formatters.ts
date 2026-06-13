@@ -37,6 +37,7 @@ export function formatDate(isoDate: string): string {
 }
 
 export function imageAltFromPath(path: string, fallback: string): string {
+  if (/^https?:\/\//.test(path)) return fallback
   const filename = path.split('/').pop()?.replace(/\.[^.]+$/, '') ?? fallback
   return filename.replace(/[-_]/g, ' ')
 }

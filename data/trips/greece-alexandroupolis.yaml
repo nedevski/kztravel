@@ -12,8 +12,8 @@ category:
   - лято
   - с-водач
 thumbnails:
-  - /images/trips/greece-alexandroupolis/hero-1.svg
-  - /images/trips/greece-alexandroupolis/hero-2.svg
+  - https://images.unsplash.com/photo-1650969841106-060fa55fbcc8?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1640598111358-a60f66c11bbf?w=1200&h=750&fit=crop&q=85&auto=format
 dates:
   - date: 2026-06-18
     price: 480
@@ -28,9 +28,9 @@ dates:
     priceBgn: 978
     status: lastSpots
 gallery:
-  - /images/trips/greece-alexandroupolis/gallery-1.svg
-  - /images/trips/greece-alexandroupolis/gallery-2.svg
-  - /images/trips/greece-alexandroupolis/gallery-3.svg
+  - https://images.unsplash.com/photo-1650969841106-060fa55fbcc8?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1640598111358-a60f66c11bbf?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1570905690699-e7b8c7e0c84a?w=1200&h=750&fit=crop&q=85&auto=format
 itinerary:
   - day: 1
     title: Пристигане в Макри

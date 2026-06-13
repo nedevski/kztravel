@@ -11,8 +11,8 @@ category:
   - екскурзия
   - с-водач
 thumbnails:
-  - /images/trips/turkey-istanbul/hero-1.svg
-  - /images/trips/turkey-istanbul/hero-2.svg
+  - https://images.unsplash.com/photo-1752926269883-78794047bac5?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&h=750&fit=crop&q=85&auto=format
 dates:
   - date: 2026-04-24
     price: 420
@@ -29,9 +29,9 @@ dates:
     discountedPriceBgn: 781
     status: lastSpots
 gallery:
-  - /images/trips/turkey-istanbul/gallery-1.svg
-  - /images/trips/turkey-istanbul/gallery-2.svg
-  - /images/trips/turkey-istanbul/gallery-3.svg
+  - https://images.unsplash.com/photo-1688668782203-b69f916c48db?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1763965367191-6455ef032c79?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1649333195003-18c47d64ed18?w=1200&h=750&fit=crop&q=85&auto=format
 itinerary:
   - day: 1
     title: Пристигане и Султанахмет
