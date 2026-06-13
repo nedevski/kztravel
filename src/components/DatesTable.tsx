@@ -1,10 +1,19 @@
 import { PriceDisplay } from '@/components/PriceDisplay'
 import { formatDate } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
-import type { TripDate } from '@/lib/types'
+import type { TripDate, TripDateStatus } from '@/lib/types'
 
 interface DatesTableProps {
   dates: TripDate[]
+}
+
+const statusConfig: Record<
+  TripDateStatus,
+  { className: string; label: string }
+> = {
+  available: { className: 'status-chip--available', label: ui.available },
+  lastSpots: { className: 'status-chip--lastSpots', label: ui.lastSpots },
+  soldout: { className: 'status-chip--soldout', label: ui.soldOut },
 }
 
 export function DatesTable({ dates }: DatesTableProps) {
@@ -22,21 +31,25 @@ export function DatesTable({ dates }: DatesTableProps) {
         </thead>
         <tbody>
           {sorted.map((entry) => (
-            <tr key={entry.date} className={entry.available ? '' : 'dates-table__unavailable'}>
+            <tr
+              key={entry.date}
+              className={entry.status === 'soldout' ? 'dates-table__unavailable' : ''}
+            >
               <td>{formatDate(entry.date)}</td>
               <td>
-                <PriceDisplay price={entry.price} discountedPrice={entry.discountedPrice} />
+                <PriceDisplay
+                  price={entry.price}
+                  priceBgn={entry.priceBgn}
+                  discountedPrice={entry.discountedPrice}
+                  discountedPriceBgn={entry.discountedPriceBgn}
+                />
               </td>
               <td>
-                {entry.available ? (
-                  <span className="status-chip status-chip--available">
-                    {ui.available}
-                  </span>
-                ) : (
-                  <span className="status-chip status-chip--soldout">
-                    {ui.soldOut}
-                  </span>
-                )}
+                <span
+                  className={`status-chip ${statusConfig[entry.status].className}`}
+                >
+                  {statusConfig[entry.status].label}
+                </span>
               </td>
             </tr>
           ))}

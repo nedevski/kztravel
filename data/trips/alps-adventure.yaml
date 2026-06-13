@@ -14,10 +14,12 @@ thumbnails:
 dates:
   - date: 2026-07-05
     price: 580
-    available: true
+    priceBgn: 1134
+    status: available
   - date: 2026-08-02
     price: 610
-    available: true
+    priceBgn: 1193
+    status: available
 gallery:
   - /images/trips/alps/gallery-1.svg
   - /images/trips/alps/gallery-2.svg
@@ -51,5 +53,7 @@ included:
 excluded:
   - name: Наем на туристически обувки
     price: 30
+    priceBgn: 59
   - name: Застраховка за пътуване (задължителна)
     price: 45
+    priceBgn: 88

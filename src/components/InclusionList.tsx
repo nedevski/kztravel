@@ -1,4 +1,4 @@
-import { formatPrice } from '@/lib/formatters'
+import { formatDualPrice, formatPrice } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
 import type { InclusionItem } from '@/lib/types'
 
@@ -29,7 +29,9 @@ export function InclusionList({ items, variant }: InclusionListProps) {
                     ? ui.includedPrice
                     : formatPrice(item.price)
                   : item.price
-                    ? formatPrice(item.price)
+                    ? item.priceBgn != null
+                      ? formatDualPrice(item.price, item.priceBgn)
+                      : formatPrice(item.price)
                     : ui.onRequest}
               </td>
             </tr>

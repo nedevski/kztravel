@@ -5,32 +5,35 @@ import { PageTitle } from '@/components/PageTitle'
 import { TripCard } from '@/components/TripCard'
 import {
   buildFilterSearch,
+  emptyFilters,
   filterTrips,
+  hasActiveFilters,
   parseFiltersFromSearch,
 } from '@/lib/filters'
 import { filterIndex, trips } from '@/lib/loadData'
 import { ui } from '@/lib/strings'
+import type { TripFilters } from '@/lib/types'
 
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const { country } = useMemo(
-    () => parseFiltersFromSearch(searchParams.toString()),
+  const filters = useMemo(
+    () => parseFiltersFromSearch(searchParams.toString(), filterIndex.priceRanges),
     [searchParams],
   )
 
-  const filteredTrips = useMemo(() => filterTrips(trips, country), [country])
+  const filteredTrips = useMemo(() => filterTrips(trips, filters), [filters])
 
-  const updateCountry = useCallback(
-    (newCountry: string | null) => {
-      const search = buildFilterSearch(newCountry)
+  const updateFilters = useCallback(
+    (nextFilters: TripFilters) => {
+      const search = buildFilterSearch(nextFilters)
       setSearchParams(search ? new URLSearchParams(search.slice(1)) : {}, { replace: true })
     },
     [setSearchParams],
   )
 
   const handleClear = () => {
-    updateCountry(null)
+    updateFilters(emptyFilters)
   }
 
   return (
@@ -45,8 +48,8 @@ export function Home() {
         <FilterBar
           filterIndex={filterIndex}
           trips={trips}
-          country={country}
-          onCountryChange={updateCountry}
+          filters={filters}
+          onFiltersChange={updateFilters}
           onClear={handleClear}
         />
 
@@ -59,9 +62,11 @@ export function Home() {
         ) : (
           <div className="empty-state">
             <p>{ui.noTripsMatch}</p>
-            <button type="button" className="empty-state__btn" onClick={handleClear}>
-              {ui.clearFilters}
-            </button>
+            {hasActiveFilters(filters) && (
+              <button type="button" className="empty-state__btn" onClick={handleClear}>
+                {ui.clearFilters}
+              </button>
+            )}
           </div>
         )}
       </section>

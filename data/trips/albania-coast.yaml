@@ -16,13 +16,16 @@ thumbnails:
 dates:
   - date: 2026-07-15
     price: 450
-    available: true
+    priceBgn: 880
+    status: lastSpots
   - date: 2026-08-12
     price: 490
-    available: false
+    priceBgn: 958
+    status: soldout
   - date: 2026-09-05
     price: 420
-    available: true
+    priceBgn: 821
+    status: available
 gallery:
   - /images/trips/albania/gallery-1.svg
   - /images/trips/albania/gallery-2.svg
@@ -64,5 +67,7 @@ included:
 excluded:
   - name: Застраховка за пътуване
     price: 35
+    priceBgn: 68
   - name: Трансфер от/до летище
     price: 25
+    priceBgn: 49

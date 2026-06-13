@@ -1,4 +1,4 @@
-import { countryLabels, ui } from './strings'
+import { countryLabels } from './strings'
 
 export function formatLabel(value: string): string {
   return value
@@ -11,12 +11,20 @@ export function formatCountryLabel(country: string): string {
   return countryLabels[country] ?? formatLabel(country)
 }
 
-export function formatPrice(price: number): string {
-  return `€${price.toLocaleString('bg-BG', { maximumFractionDigits: 0 })}`
+function formatPriceAmount(price: number): string {
+  return price.toLocaleString('bg-BG', { maximumFractionDigits: 0 })
 }
 
-export function formatPriceFrom(price: number): string {
-  return ui.priceFrom(formatPrice(price))
+export function formatPrice(price: number): string {
+  return `€${formatPriceAmount(price)}`
+}
+
+export function formatDualPrice(eur: number, bgn: number): string {
+  return `€${formatPriceAmount(eur)} / ${formatPriceAmount(bgn)}лв`
+}
+
+export function formatPriceFrom(price: number, priceBgn: number): string {
+  return formatDualPrice(price, priceBgn)
 }
 
 export function formatDate(isoDate: string): string {

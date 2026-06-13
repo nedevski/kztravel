@@ -1,24 +1,27 @@
-import { formatPriceFrom } from '@/lib/formatters'
+import { formatDualPrice } from '@/lib/formatters'
 
 interface PriceDisplayProps {
   price: number
+  priceBgn: number
   discountedPrice?: number | null
+  discountedPriceBgn?: number | null
   className?: string
   variant?: 'default' | 'chip'
 }
 
-function formatPriceAmount(price: number): string {
-  return price.toLocaleString('bg-BG', { maximumFractionDigits: 0 })
-}
-
 export function PriceDisplay({
   price,
+  priceBgn,
   discountedPrice,
+  discountedPriceBgn,
   className,
   variant = 'default',
 }: PriceDisplayProps) {
   const hasDiscount =
-    discountedPrice != null && discountedPrice > 0 && discountedPrice < price
+    discountedPrice != null &&
+    discountedPriceBgn != null &&
+    discountedPrice > 0 &&
+    discountedPrice < price
   const displayClass = [
     'price-display',
     variant === 'chip' ? 'price-display--chip' : '',
@@ -30,13 +33,15 @@ export function PriceDisplay({
   if (hasDiscount) {
     return (
       <span className={displayClass}>
-        <span className="price-display__current">{formatPriceFrom(discountedPrice)}</span>
         <span className="price-display__original price-display__struck">
-          €{formatPriceAmount(price)}
+          {formatDualPrice(price, priceBgn)}
+        </span>
+        <span className="price-display__current">
+          {formatDualPrice(discountedPrice, discountedPriceBgn)}
         </span>
       </span>
     )
   }
 
-  return <span className={displayClass}>{formatPriceFrom(price)}</span>
+  return <span className={displayClass}>{formatDualPrice(price, priceBgn)}</span>
 }

@@ -17,13 +17,16 @@ thumbnails:
 dates:
   - date: 2026-06-18
     price: 500
-    available: true
+    priceBgn: 978
+    status: available
   - date: 2026-06-25
     price: 500
-    available: true
+    priceBgn: 978
+    status: available
   - date: 2026-07-02
     price: 500
-    available: true
+    priceBgn: 978
+    status: available
 gallery:
   - /images/trips/greece-makri/gallery-1.svg
   - /images/trips/greece-makri/gallery-2.svg
@@ -70,7 +73,9 @@ included:
 excluded:
   - name: Застраховка за пътуване
     price: 30
+    priceBgn: 59
   - name: Обяд и вечеря (освен закуска)
     price: 0
   - name: Лодкова разходка по желание
     price: 25
+    priceBgn: 49

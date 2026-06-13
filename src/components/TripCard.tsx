@@ -39,7 +39,9 @@ export function TripCard({ trip }: TripCardProps) {
               ) : (
                 <PriceDisplay
                   price={trip.displayPrice!}
+                  priceBgn={trip.displayPriceBgn!}
                   discountedPrice={trip.displayDiscountedPrice}
+                  discountedPriceBgn={trip.displayDiscountedPriceBgn}
                   variant="chip"
                 />
               )}

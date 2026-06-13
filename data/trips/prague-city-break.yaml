@@ -13,14 +13,18 @@ thumbnails:
 dates:
   - date: 2026-05-08
     price: 320
-    available: false
+    priceBgn: 626
+    status: soldout
   - date: 2026-10-16
     price: 340
+    priceBgn: 665
     discountedPrice: 299
-    available: true
+    discountedPriceBgn: 585
+    status: lastSpots
   - date: 2026-11-13
     price: 290
-    available: true
+    priceBgn: 567
+    status: available
 gallery:
   - /images/trips/prague/gallery-1.svg
   - /images/trips/prague/gallery-2.svg
@@ -46,3 +50,4 @@ excluded:
     price: 0
   - name: Входни такси за музеи
     price: 18
+    priceBgn: 35

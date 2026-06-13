@@ -15,15 +15,20 @@ thumbnails:
 dates:
   - date: 2026-06-20
     price: 890
+    priceBgn: 1741
     discountedPrice: 790
-    available: true
+    discountedPriceBgn: 1545
+    status: available
   - date: 2026-07-18
     price: 950
+    priceBgn: 1858
     discountedPrice: 850
-    available: true
+    discountedPriceBgn: 1662
+    status: lastSpots
   - date: 2026-08-22
     price: 1020
-    available: false
+    priceBgn: 1995
+    status: soldout
 gallery:
   - /images/trips/greece/gallery-1.svg
   - /images/trips/greece/gallery-2.svg
@@ -56,5 +61,7 @@ included:
 excluded:
   - name: Застраховка за пътуване
     price: 40
+    priceBgn: 78
   - name: По желание круиз с катамаран
     price: 65
+    priceBgn: 127

@@ -5,7 +5,6 @@ import { InclusionList } from '@/components/InclusionList'
 import { Itinerary } from '@/components/Itinerary'
 import { PageTitle } from '@/components/PageTitle'
 import { Slideshow } from '@/components/Slideshow'
-import { PriceDisplay } from '@/components/PriceDisplay'
 import { formatCountryLabel, formatLabel } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
 import { buildFilterSearch } from '@/lib/filters'
@@ -36,7 +35,7 @@ export function TripDetail() {
           <div className="trip-detail__hero-bar">
             <div className="trip-detail__badges">
               <Link
-                to={`/${buildFilterSearch(trip.country)}`}
+                to={`/${buildFilterSearch({ country: trip.country })}`}
                 className="badge badge--country badge--link"
               >
                 {formatCountryLabel(trip.country)}
@@ -58,17 +57,6 @@ export function TripDetail() {
             <h1 className="trip-detail__title">{trip.name}</h1>
             {trip.duration && <p className="trip-detail__duration">{trip.duration}</p>}
             <p className="trip-detail__description">{trip.description}</p>
-            <div className="trip-detail__summary">
-              {trip.fullyBooked ? (
-                <span className="trip-detail__price">{ui.contactForAvailability}</span>
-              ) : (
-                <PriceDisplay
-                  className="trip-detail__price"
-                  price={trip.displayPrice!}
-                  discountedPrice={trip.displayDiscountedPrice}
-                />
-              )}
-            </div>
           </div>
         </header>
 

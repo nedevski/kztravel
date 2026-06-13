@@ -12,11 +12,15 @@ export interface SiteSettings {
   contact: ContactInfo
 }
 
+export type TripDateStatus = 'available' | 'soldout' | 'lastSpots'
+
 export interface TripDate {
   date: string
   price: number
+  priceBgn: number
   discountedPrice?: number
-  available: boolean
+  discountedPriceBgn?: number
+  status: TripDateStatus
 }
 
 export interface ItineraryDay {
@@ -28,6 +32,7 @@ export interface ItineraryDay {
 export interface InclusionItem {
   name: string
   price?: number
+  priceBgn?: number
 }
 
 export interface TripYaml {
@@ -53,11 +58,39 @@ export interface Trip extends Omit<TripYaml, 'category' | 'gallery' | 'itinerary
   excluded: InclusionItem[]
   nextDate: TripDate | null
   displayPrice: number | null
+  displayPriceBgn: number | null
   displayDiscountedPrice: number | null
+  displayDiscountedPriceBgn: number | null
   fullyBooked: boolean
   moreAvailableDates: number
 }
 
+export interface PriceRange {
+  id: string
+  label: string
+  min: number
+  max: number | null
+}
+
+export interface DurationOption {
+  days: string
+  label: string
+}
+
+export interface TripFilters {
+  country: string | null
+  categories: string[]
+  durations: string[]
+  priceRange: PriceRange | null
+}
+
 export interface FilterIndex {
   countries: string[]
+  categories: string[]
+  durations: DurationOption[]
+  priceRanges: PriceRange[]
+  showCountryFilter: boolean
+  showCategoryFilter: boolean
+  showDurationFilter: boolean
+  showPriceFilter: boolean
 }

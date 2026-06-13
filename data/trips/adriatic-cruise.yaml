@@ -15,10 +15,12 @@ thumbnails:
 dates:
   - date: 2026-06-14
     price: 1200
-    available: false
+    priceBgn: 2347
+    status: soldout
   - date: 2026-09-20
     price: 1150
-    available: true
+    priceBgn: 2249
+    status: available
 gallery:
   - /images/trips/adriatic/gallery-1.svg
   - /images/trips/adriatic/gallery-2.svg
@@ -54,5 +56,6 @@ included:
 excluded:
   - name: Бакшиши
     price: 70
+    priceBgn: 137
   - name: Спа процедури
     price: 0
