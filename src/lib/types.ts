@@ -15,6 +15,7 @@ export interface SiteSettings {
 export interface TripDate {
   date: string
   price: number
+  discountedPrice?: number
   available: boolean
 }
 
@@ -52,6 +53,7 @@ export interface Trip extends Omit<TripYaml, 'category' | 'gallery' | 'itinerary
   excluded: InclusionItem[]
   nextDate: TripDate | null
   displayPrice: number | null
+  displayDiscountedPrice: number | null
   fullyBooked: boolean
   moreAvailableDates: number
 }

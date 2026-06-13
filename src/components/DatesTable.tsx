@@ -1,4 +1,5 @@
-import { formatDate, formatPrice } from '@/lib/formatters'
+import { PriceDisplay } from '@/components/PriceDisplay'
+import { formatDate } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
 import type { TripDate } from '@/lib/types'
 
@@ -23,7 +24,9 @@ export function DatesTable({ dates }: DatesTableProps) {
           {sorted.map((entry) => (
             <tr key={entry.date} className={entry.available ? '' : 'dates-table__unavailable'}>
               <td>{formatDate(entry.date)}</td>
-              <td>{formatPrice(entry.price)}</td>
+              <td>
+                <PriceDisplay price={entry.price} discountedPrice={entry.discountedPrice} />
+              </td>
               <td>
                 {entry.available ? (
                   <span className="status-chip status-chip--available">

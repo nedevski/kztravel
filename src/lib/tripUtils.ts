@@ -29,6 +29,7 @@ export function enrichTrip(slug: string, data: TripYaml) {
     excluded: data.excluded ?? [],
     nextDate,
     displayPrice: nextDate?.price ?? null,
+    displayDiscountedPrice: nextDate?.discountedPrice ?? null,
     fullyBooked: nextDate === null,
     moreAvailableDates: Math.max(0, upcomingAvailable.length - 1),
   }

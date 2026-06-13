@@ -16,6 +16,7 @@ dates:
     available: false
   - date: 2026-10-16
     price: 340
+    discountedPrice: 299
     available: true
   - date: 2026-11-13
     price: 290

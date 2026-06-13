@@ -15,9 +15,11 @@ thumbnails:
 dates:
   - date: 2026-06-20
     price: 890
+    discountedPrice: 790
     available: true
   - date: 2026-07-18
     price: 950
+    discountedPrice: 850
     available: true
   - date: 2026-08-22
     price: 1020

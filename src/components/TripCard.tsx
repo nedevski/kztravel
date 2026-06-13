@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { formatCountryLabel, formatDate, formatLabel, formatPrice } from '@/lib/formatters'
+import { PriceDisplay } from '@/components/PriceDisplay'
+import { formatCountryLabel, formatDate, formatLabel } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
 import type { Trip } from '@/lib/types'
 import { Slideshow } from './Slideshow'
@@ -30,10 +31,18 @@ export function TripCard({ trip }: TripCardProps) {
         </div>
         <h2 className="trip-card__title">{trip.name}</h2>
         <div className="trip-card__meta">
-          <div className="trip-card__price-group">
+          <div className="trip-card__pricing">
             {trip.duration && <span className="trip-card__duration">{trip.duration}</span>}
-            <span className="trip-card__price">
-              {trip.fullyBooked ? ui.contactUs : formatPrice(trip.displayPrice!)}
+            <span className="trip-card__price-chip">
+              {trip.fullyBooked ? (
+                ui.contactUs
+              ) : (
+                <PriceDisplay
+                  price={trip.displayPrice!}
+                  discountedPrice={trip.displayDiscountedPrice}
+                  variant="chip"
+                />
+              )}
             </span>
           </div>
           {!trip.fullyBooked && (

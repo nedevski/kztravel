@@ -5,7 +5,8 @@ import { InclusionList } from '@/components/InclusionList'
 import { Itinerary } from '@/components/Itinerary'
 import { PageTitle } from '@/components/PageTitle'
 import { Slideshow } from '@/components/Slideshow'
-import { formatCountryLabel, formatLabel, formatPrice } from '@/lib/formatters'
+import { PriceDisplay } from '@/components/PriceDisplay'
+import { formatCountryLabel, formatLabel } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
 import { buildFilterSearch } from '@/lib/filters'
 import { getTripBySlug } from '@/lib/loadData'
@@ -61,9 +62,11 @@ export function TripDetail() {
               {trip.fullyBooked ? (
                 <span className="trip-detail__price">{ui.contactForAvailability}</span>
               ) : (
-                <span className="trip-detail__price">
-                  {ui.priceFrom(formatPrice(trip.displayPrice!))}
-                </span>
+                <PriceDisplay
+                  className="trip-detail__price"
+                  price={trip.displayPrice!}
+                  discountedPrice={trip.displayDiscountedPrice}
+                />
               )}
             </div>
           </div>
