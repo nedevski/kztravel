@@ -43,14 +43,16 @@ export function TripCard({ trip }: TripCardProps) {
             <span className="trip-card__price-chip">
               {trip.fullyBooked ? (
                 ui.contactUs
-              ) : (
+              ) : trip.displayPrice != null && trip.displayPriceBgn != null ? (
                 <PriceDisplay
-                  price={trip.displayPrice!}
-                  priceBgn={trip.displayPriceBgn!}
+                  price={trip.displayPrice}
+                  priceBgn={trip.displayPriceBgn}
                   discountedPrice={trip.displayDiscountedPrice}
                   discountedPriceBgn={trip.displayDiscountedPriceBgn}
                   variant="chip"
                 />
+              ) : (
+                ui.contactUs
               )}
             </span>
           </div>

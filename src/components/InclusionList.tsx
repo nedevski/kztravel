@@ -25,10 +25,10 @@ export function InclusionList({ items, variant }: InclusionListProps) {
               <td>{item.name}</td>
               <td>
                 {variant === 'included'
-                  ? !item.price
+                  ? item.price == null || item.price === 0
                     ? ui.includedPrice
                     : formatPrice(item.price)
-                  : item.price
+                  : item.price != null
                     ? item.priceBgn != null
                       ? formatDualPrice(item.price, item.priceBgn)
                       : formatPrice(item.price)

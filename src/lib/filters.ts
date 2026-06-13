@@ -162,7 +162,7 @@ export function parseFiltersFromSearch(
   }
 }
 
-export function buildFilterSearch(filters: Partial<TripFilters>): string {
+export function buildFilterParams(filters: Partial<TripFilters>): URLSearchParams {
   const params = new URLSearchParams()
 
   if (filters.country) {
@@ -181,7 +181,11 @@ export function buildFilterSearch(filters: Partial<TripFilters>): string {
     params.set('price', filters.priceRange.id)
   }
 
-  const search = params.toString()
+  return params
+}
+
+export function buildFilterSearch(filters: Partial<TripFilters>): string {
+  const search = buildFilterParams(filters).toString()
   return search ? `?${search}` : ''
 }
 

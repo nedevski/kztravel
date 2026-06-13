@@ -12,8 +12,8 @@ export function Itinerary({ days }: ItineraryProps) {
 
   return (
     <ol className="itinerary">
-      {sorted.map((day) => (
-        <li key={day.day} className="itinerary__day">
+      {sorted.map((day, i) => (
+        <li key={`${day.day}-${i}`} className="itinerary__day">
           <span className="itinerary__number">{ui.day(day.day)}</span>
           <div className="itinerary__content">
             <h3 className="itinerary__title">{day.title}</h3>

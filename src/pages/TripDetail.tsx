@@ -7,7 +7,7 @@ import { PageTitle } from '@/components/PageTitle'
 import { Slideshow } from '@/components/Slideshow'
 import { formatCountryLabel, formatLabel } from '@/lib/formatters'
 import { ui } from '@/lib/strings'
-import { buildFilterSearch } from '@/lib/filters'
+import { buildFilterParams, emptyFilters } from '@/lib/filters'
 import { getTripBySlug } from '@/lib/loadData'
 
 export function TripDetail() {
@@ -38,7 +38,10 @@ export function TripDetail() {
               <div className="trip-detail__hero-bar">
                 <div className="trip-detail__badges">
                   <Link
-                    to={`/${buildFilterSearch({ country: trip.country })}`}
+                    to={{
+                      pathname: '/',
+                      search: buildFilterParams({ ...emptyFilters, country: trip.country }).toString(),
+                    }}
                     className="badge badge--country badge--link"
                   >
                     {formatCountryLabel(trip.country)}

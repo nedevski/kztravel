@@ -1,4 +1,21 @@
-import type { TripDate, TripYaml } from './types'
+import type { Trip, TripDate, TripDateStatus, TripYaml } from './types'
+
+const VALID_STATUSES: TripDateStatus[] = ['available', 'lastSpots', 'soldout']
+
+export function normalizeDate(entry: TripDate): TripDate {
+  if (entry.status && VALID_STATUSES.includes(entry.status)) return entry
+
+  if (entry.status) {
+    console.warn(
+      `[kztravel] Unknown status "${entry.status}" for date ${entry.date}, defaulting to available`,
+    )
+  }
+
+  return {
+    ...entry,
+    status: entry.available === false ? 'soldout' : 'available',
+  }
+}
 
 export function getTodayISO(): string {
   const now = new Date()
@@ -63,13 +80,15 @@ export function isFullyBooked(dates: TripDate[]): boolean {
   return getNextAvailableDate(dates) === null
 }
 
-export function enrichTrip(slug: string, data: TripYaml) {
-  const upcomingBookable = getUpcomingBookableDates(data.dates)
+export function enrichTrip(slug: string, data: TripYaml): Trip {
+  const dates = data.dates.map(normalizeDate)
+  const upcomingBookable = getUpcomingBookableDates(dates)
   const nextDate = upcomingBookable[0] ?? null
-  const ended = isTripEnded(data.dates)
-  const lastDate = ended ? getMostRecentDate(data.dates) : null
+  const ended = isTripEnded(dates)
+  const lastDate = ended ? getMostRecentDate(dates) : null
   return {
     ...data,
+    dates,
     slug,
     category: data.category ?? [],
     gallery: data.gallery ?? [],
@@ -84,6 +103,6 @@ export function enrichTrip(slug: string, data: TripYaml) {
     displayDiscountedPriceBgn: nextDate?.discountedPriceBgn ?? lastDate?.discountedPriceBgn ?? null,
     ended,
     fullyBooked: !ended && nextDate === null,
-    moreAvailableDates: getAdditionalBookableDateCount(data.dates),
+    moreAvailableDates: getAdditionalBookableDateCount(dates),
   }
 }

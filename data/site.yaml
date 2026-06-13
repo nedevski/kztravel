@@ -6,3 +6,6 @@ contact:
   email: info@kztravel.bg
   address: 'ул. „Измислена“ 123, гр. Казанлък'
   mapEmbedUrl: https://www.openstreetmap.org/export/embed.html?bbox=25.3902%2C42.6164%2C25.3954%2C42.6214&layer=mapnik&marker=42.6189%2C25.3928
+footer:
+  registration: Свидетелство за регистрация на туроператор номер РК-00-00000
+  company: ФИРМА ЕООД

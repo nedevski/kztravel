@@ -11,7 +11,7 @@ Build a **static travel agency website** for a small catalog of trips (initially
 
 ### Goals
 
-- Filter trips on the landing page by **country**
+- Filter trips on the landing page by **country**, **category**, **duration**, and **price range**
 - Dedicated detail page per trip
 - Easy to add or edit trips and site-wide settings by changing YAML files (no code changes required for content updates)
 - Zero backend; no database or API
@@ -22,7 +22,8 @@ Build a **static travel agency website** for a small catalog of trips (initially
 - Admin UI or CMS
 - Full-text search or multi-language support
 - Payment integration
-- Category filtering on the landing page (deferred - `category` is display-only for now)
+
+Category, duration, and price filters are implemented on the landing page alongside the country filter.
 
 ---
 
@@ -65,16 +66,19 @@ Each trip card shows:
 | **Title** | `name` from YAML |
 | **Image** | First thumbnail, or auto-slideshow if `thumbnails` has more than one image |
 | **Price** | Price of the **next upcoming available date** (see §4.5) |
-| **Next date** | Earliest `date` where `available: true` and date is today or in the future |
+| **Next date** | Earliest `date` where `status` is `available` or `lastSpots` and date is today or in the future |
 | **Country / category** | Optional badges on the card (country + up to 2 category chips) |
 
 Clicking a card navigates to that trip’s detail page.
 
 **Filtering:** Above the trip grid, show controls to narrow the list:
 
-- **Country filter** - select one country, or “All” (see §4.3)
+- **Country filter** - select one country, or “All”
+- **Category filter** - multi-select trip type labels
+- **Duration filter** - multi-select by number of days
+- **Price range filter** - select one price band
 
-Filtering is **client-side** on the landing page (no server, no extra routes required for v1). Selected filters are reflected in the URL query string (e.g. `?country=albania`) so filtered views are shareable.
+Filtering is **client-side** on the landing page (no server, no extra routes required for v1). Selected filters are reflected in the URL query string (e.g. `?country=albania&category=beach`) so filtered views are shareable.
 
 **Layout:** Classic magazine view - visual-first cards with strong imagery, title overlay or below image, price and date clearly visible. Responsive grid (e.g. 1 column mobile, 2-3 columns desktop). Empty state when no trips match the active filters.
 
@@ -87,7 +91,7 @@ One page per vacation, showing full content from its YAML file:
 | Section | Content |
 |---------|---------|
 | Hero / header | Title, description, country, categories, thumbnail slideshow (same behavior as landing card) |
-| Dates & pricing | Table or list of all `{ date, price, available }` entries |
+| Dates & pricing | Table or list of all `{ date, price, priceBgn, status }` entries (optional discount fields) |
 | Gallery | Full-width or grid of `gallery` images |
 | Itinerary | Day-by-day breakdown from `itinerary` |
 | Included | Items from `included` (name + price) |
@@ -121,6 +125,14 @@ data/
 title: KZ Travel                 # Site name; used in <title>, header, and meta tags
 favicon: /images/favicon.ico     # Browser tab icon
 background: /images/bg.jpg       # Optional full-page or landing background image
+contact:
+  phone: "+359 ..."
+  email: info@example.com
+  address: Street address
+  mapEmbedUrl: https://...
+footer:
+  registration: Tour operator registration text
+  company: Company name for copyright line
 ```
 
 | Field | Type | Required | Notes |
@@ -128,6 +140,8 @@ background: /images/bg.jpg       # Optional full-page or landing background imag
 | `title` | string | yes | Appended to page titles (e.g. `Albania Coast - KZ Travel`) |
 | `favicon` | string | yes | Path to `.ico`, `.png`, or `.svg` in `public/` |
 | `background` | string | no | Site-wide background; omit for solid/default background |
+| `contact` | object | yes | Phone, email, address, map embed URL for contact page |
+| `footer` | object | yes | Registration text and company name shown in site footer |
 
 Additional global fields (contact email, logo, tagline, etc.) can be added to this file later without changing the trip schema.
 
@@ -150,11 +164,19 @@ thumbnails:                     # Used on landing card and detail hero
 
 dates:                          # Scheduled departures
   - date: 2026-07-15            # ISO date (YYYY-MM-DD)
-    price: 450
-    available: true
+    price: 450                  # EUR
+    priceBgn: 880               # BGN
+    status: available           # available | lastSpots | soldout
   - date: 2026-08-12
     price: 490
-    available: false
+    priceBgn: 958
+    discountedPrice: 450
+    discountedPriceBgn: 880
+    status: lastSpots
+  - date: 2026-09-05
+    price: 520
+    priceBgn: 1017
+    status: soldout
 
 gallery:                        # Detail page photo gallery
   - /images/trips/albania/gallery-1.jpg
@@ -186,12 +208,12 @@ excluded:                       # Not covered; optional extras or out-of-pocket
 | Field | Cardinality | Purpose | Examples |
 |-------|-------------|---------|----------|
 | `country` | **one string** | Destination country; drives the landing-page country filter | `albania`, `greece`, `croatia`, `czech-republic` |
-| `category` | **string array** | Trip type and cross-cutting attributes; display-only in v1 | `beach`, `city-break`, `family-friendly`, `luxury`, `guided`, `summer` |
+| `category` | **string array** | Trip type and cross-cutting attributes; used in category filter and as badges | `beach`, `city-break`, `family-friendly`, `luxury`, `guided`, `summer` |
 
 - Values are **kebab-case or lowercase strings** in YAML; displayed with human-friendly labels in the UI (e.g. `czech-republic` → “Czech Republic”, `city-break` → “City break”).
 - The set of countries shown in filter controls is **derived at build time** from all trip files (union of unique values). No separate taxonomy file required for v1.
-- Category filtering may be added in a later version.
-- Optional later: allowlist in `site.yaml` to enforce consistent spelling across trips.
+- Category filtering uses OR logic (trip matches if it has any selected category).
+- Country labels are translated in `src/lib/strings.ts` (`countryLabels`); new countries need an entry there for Bulgarian display names.
 
 ### 4.4 Trip field reference
 
@@ -204,8 +226,12 @@ excluded:                       # Not covered; optional extras or out-of-pocket
 | `thumbnails` | string[] | yes | At least one image; slideshow if length > 1 |
 | `dates` | object[] | yes | At least one entry |
 | `dates[].date` | string (ISO date) | yes | |
-| `dates[].price` | number | yes | Currency TBD (assume EUR unless specified) |
-| `dates[].available` | boolean | yes | `false` = sold out / not bookable |
+| `dates[].price` | number | yes | Price in EUR |
+| `dates[].priceBgn` | number | yes | Price in BGN |
+| `dates[].status` | string | yes | `available`, `lastSpots`, or `soldout` |
+| `dates[].discountedPrice` | number | no | Optional discounted EUR price |
+| `dates[].discountedPriceBgn` | number | no | Optional discounted BGN price |
+| `dates[].available` | boolean | no | **Deprecated** — use `status: soldout` instead |
 | `gallery` | string[] | no | Empty array OK |
 | `itinerary` | object[] | no | Each entry: `day`, `title`, `description` |
 | `included` | object[] | no | Each entry: `name`, `price` |
@@ -213,8 +239,8 @@ excluded:                       # Not covered; optional extras or out-of-pocket
 
 ### 4.5 Derived values (computed at build time)
 
-- **Next date:** smallest `dates[].date` where `available === true` and `date >= today`.
-- **Display price on landing card:** `price` from that next available date.
+- **Next date:** smallest `dates[].date` where `status` is `available` or `lastSpots` and `date >= today`.
+- **Display price on landing card:** `price` / `priceBgn` from that next bookable date (discounted price used when present).
 - **Fallback:** If no upcoming available dates, show “Contact us” or last known price (behavior TBD - see open questions).
 - **Filter index:** unique sorted list of all `country` values across trips, used to populate landing-page country filter controls.
 
@@ -225,9 +251,11 @@ excluded:                       # Not covered; optional extras or out-of-pocket
 ### Landing page - filters
 
 - **Country control:** Buttons, tabs, or dropdown - one active country at a time plus “All”.
-- **Category filter:** Not implemented in v1; `category` values are shown as badges only.
-- **Counts (optional):** Show number of trips per country when space allows.
-- **Clear filters:** One action to reset to “All”.
+- **Category filter:** Multi-select chips; OR logic.
+- **Duration filter:** Multi-select by parsed day count from `duration` field.
+- **Price range filter:** Single-select price bands derived from trip prices.
+- **Counts:** Show number of trips per filter option when space allows.
+- **Clear filters:** One action to reset all filters.
 
 ### Landing page - trip card
 
@@ -334,7 +362,7 @@ See schemas in §4.2 and §4.3. At launch, seed **`site.yaml`** plus **3-6 sampl
 - [ ] Global settings loaded from `data/site.yaml` (title, favicon, background)
 - [ ] All trips loaded from `data/trips/*.yaml` at build time
 - [ ] Landing page shows magazine-style cards with title, image(s), next date, and price
-- [ ] Landing page filters trips by country (client-side)
+- [ ] Landing page filters trips by country, category, duration, and price (client-side)
 - [ ] Each trip YAML includes `country` and optional `category`
 - [ ] Multi-thumbnail trips auto-slideshow on landing and detail pages
 - [ ] Each trip has a detail page with gallery, itinerary, included, and excluded sections

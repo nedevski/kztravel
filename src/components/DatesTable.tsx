@@ -49,8 +49,8 @@ export function DatesTable({ dates }: DatesTableProps) {
           </tr>
         </thead>
         <tbody>
-          {sorted.map((entry) => (
-            <tr key={entry.date} className={dateEntryClass(entry)}>
+          {sorted.map((entry, i) => (
+            <tr key={`${entry.date}-${i}`} className={dateEntryClass(entry)}>
               <td>{formatDate(entry.date)}</td>
               <td>
                 <PriceDisplay
@@ -69,9 +69,9 @@ export function DatesTable({ dates }: DatesTableProps) {
       </table>
 
       <div className="dates-table__mobile">
-        {sorted.map((entry) => (
+        {sorted.map((entry, i) => (
           <div
-            key={entry.date}
+            key={`${entry.date}-${i}`}
             className={`dates-table__card ${dateEntryClass(entry)}`}
           >
             <div className="dates-table__card-row">

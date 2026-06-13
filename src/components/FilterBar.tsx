@@ -5,6 +5,7 @@ import {
   getFilterPool,
   getTripFilterPrice,
   hasActiveFilters,
+  parseDurationDays,
   priceInRange,
 } from '@/lib/filters'
 import { ui } from '@/lib/strings'
@@ -29,10 +30,7 @@ function countByCategory(trips: Trip[], category: string): number {
 }
 
 function countByDuration(trips: Trip[], days: string): number {
-  return trips.filter((trip) => {
-    const match = trip.duration?.match(/(\d+)/)
-    return match?.[1] === days
-  }).length
+  return trips.filter((trip) => parseDurationDays(trip.duration)?.toString() === days).length
 }
 
 function countByPriceRange(trips: Trip[], range: PriceRange): number {

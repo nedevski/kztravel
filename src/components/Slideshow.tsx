@@ -17,7 +17,12 @@ export function Slideshow({
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    if (images.length <= 1) return
+    setIndex(0)
+  }, [images])
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (images.length <= 1 || prefersReducedMotion) return
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % images.length)
     }, intervalMs)
@@ -26,6 +31,8 @@ export function Slideshow({
 
   if (images.length === 0) return null
 
+  const safeIndex = index % images.length
+
   return (
     <div className={`slideshow ${className}`}>
       {images.map((src, i) => (
@@ -33,7 +40,7 @@ export function Slideshow({
           key={src}
           src={src}
           alt={imageAltFromPath(src, alt)}
-          className={i === index ? 'slideshow__img active' : 'slideshow__img'}
+          className={i === safeIndex ? 'slideshow__img active' : 'slideshow__img'}
           loading={i === 0 ? 'eager' : 'lazy'}
         />
       ))}
@@ -42,7 +49,7 @@ export function Slideshow({
           {images.map((_, i) => (
             <span
               key={i}
-              className={i === index ? 'slideshow__dot active' : 'slideshow__dot'}
+              className={i === safeIndex ? 'slideshow__dot active' : 'slideshow__dot'}
             />
           ))}
         </div>

@@ -5,11 +5,17 @@ export interface ContactInfo {
   mapEmbedUrl: string
 }
 
+export interface SiteFooter {
+  registration: string
+  company: string
+}
+
 export interface SiteSettings {
   title: string
   favicon: string
   background?: string
   contact: ContactInfo
+  footer: SiteFooter
 }
 
 export type TripDateStatus = 'available' | 'soldout' | 'lastSpots'

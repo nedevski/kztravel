@@ -73,9 +73,9 @@ export function Layout() {
       </main>
       <footer className="site-footer">
         <p>
-          Свидетелство за регистрация на туроператор номер РК-00-00000
+          {siteSettings.footer.registration}
           <br />
-          ФИРМА ЕООД &copy; {new Date().getFullYear()} Всички права запазени.
+          {siteSettings.footer.company} &copy; {new Date().getFullYear()} Всички права запазени.
         </p>
       </footer>
     </div>

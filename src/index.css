@@ -878,6 +878,12 @@ a.site-header__contact-item:hover {
   opacity: 1;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .slideshow__img {
+    transition: none;
+  }
+}
+
 .slideshow__dots {
   position: absolute;
   bottom: 0.75rem;
@@ -1669,6 +1675,13 @@ a.contact__value:hover {
   background: rgba(0, 0, 0, 0.45);
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-lightbox__close,
+  .gallery-lightbox__nav {
+    transition: none;
+  }
 }
 
 @media (max-width: 640px) {

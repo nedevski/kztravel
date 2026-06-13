@@ -4,7 +4,7 @@ import { FilterBar } from '@/components/FilterBar'
 import { PageTitle } from '@/components/PageTitle'
 import { TripCard } from '@/components/TripCard'
 import {
-  buildFilterSearch,
+  buildFilterParams,
   emptyFilters,
   filterTrips,
   hasActiveFilters,
@@ -26,8 +26,7 @@ export function Home() {
 
   const updateFilters = useCallback(
     (nextFilters: TripFilters) => {
-      const search = buildFilterSearch(nextFilters)
-      setSearchParams(search ? new URLSearchParams(search.slice(1)) : {}, { replace: true })
+      setSearchParams(buildFilterParams(nextFilters), { replace: true })
     },
     [setSearchParams],
   )

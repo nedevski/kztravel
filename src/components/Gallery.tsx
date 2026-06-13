@@ -19,9 +19,15 @@ export function Gallery({ images, tripName }: GalleryProps) {
   const [pageStart, setPageStart] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const galleryRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
   const suppressClickRef = useRef(false)
 
-  const close = useCallback(() => setActiveIndex(null), [])
+  const close = useCallback(() => {
+    setActiveIndex(null)
+    previousFocusRef.current?.focus()
+    previousFocusRef.current = null
+  }, [])
 
   const goPrev = useCallback(() => {
     setActiveIndex((i) => (i === null ? null : (i - 1 + images.length) % images.length))
@@ -33,6 +39,9 @@ export function Gallery({ images, tripName }: GalleryProps) {
 
   useEffect(() => {
     if (activeIndex === null) return
+
+    previousFocusRef.current = document.activeElement as HTMLElement | null
+    closeButtonRef.current?.focus()
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
@@ -176,7 +185,7 @@ export function Gallery({ images, tripName }: GalleryProps) {
         >
           {images.map((src, i) => (
             <button
-              key={src}
+              key={`${src}-${i}`}
               type="button"
               className={`gallery__thumb${
                 !isThumbVisibleOnDesktop(i) ? ' gallery__thumb--desktop-hidden' : ''
@@ -220,6 +229,7 @@ export function Gallery({ images, tripName }: GalleryProps) {
         >
           <div className="gallery-lightbox__content" onClick={(e) => e.stopPropagation()}>
             <button
+              ref={closeButtonRef}
               type="button"
               className="gallery-lightbox__close"
               onClick={close}
