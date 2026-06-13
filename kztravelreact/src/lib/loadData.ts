@@ -18,12 +18,12 @@ function assertContactInfo(contact: ContactInfo): ContactInfo {
     contact.workingHours.some((hours) => !hours?.trim())
   ) {
     throw new Error(
-      '[kztravel] site.yaml: contact.workingHours must be an array of 7 day entries',
+      '[kztravelreact] site.yaml: contact.workingHours must be an array of 7 day entries',
     )
   }
   const { bankName, iban, holder } = contact.bankDetails ?? {}
   if (!bankName?.trim() || !iban?.trim() || !holder?.trim()) {
-    throw new Error('[kztravel] site.yaml: contact.bankDetails (bankName, iban, holder) is required')
+    throw new Error('[kztravelreact] site.yaml: contact.bankDetails (bankName, iban, holder) is required')
   }
   return contact
 }

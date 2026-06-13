@@ -30,21 +30,21 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: kztravel/package-lock.json
+          cache-dependency-path: kztravelreact/package-lock.json
 
       - run: npm ci
-        working-directory: kztravel
+        working-directory: kztravelreact
 
       - name: Build for GitHub Pages
         run: npm run build
-        working-directory: kztravel
+        working-directory: kztravelreact
         env:
           # Empty when served at domain root; GitHub Pages provides the URL.
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: kztravel/dist
+          path: kztravelreact/dist
 
       - id: deployment
         uses: actions/deploy-pages@v4

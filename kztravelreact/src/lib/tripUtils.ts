@@ -7,7 +7,7 @@ export function normalizeDate(entry: TripDate): TripDate {
 
   if (entry.status) {
     console.warn(
-      `[kztravel] Unknown status "${entry.status}" for date ${entry.date}, defaulting to available`,
+      `[kztravelreact] Unknown status "${entry.status}" for date ${entry.date}, defaulting to available`,
     )
   }
 

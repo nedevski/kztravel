@@ -140,11 +140,12 @@ Set **Settings → Reading → Your homepage displays → A static page** and pi
 
 On your Windows machine:
 
-- **PHP 8.1+** and **Composer** (optional but useful)
-- **Node.js 22+** (only if you bundle theme JS with Vite/webpack; optional)
+- **[Local](https://localwp.com/)** (bundles PHP, MySQL, and web server — no separate PHP install needed)
 - **Git**
-- A local WordPress environment (see §5)
+- **Node.js 22+** (only if you bundle theme JS with Vite/webpack; optional)
 - Basic comfort with PHP (templates are mostly HTML + `<?php … ?>`)
+
+Composer is optional and only needed if you adopt a Composer-based WordPress workflow later (e.g. Bedrock).
 
 You do **not** need to run the React app in production after migration. The React repo can be archived or kept as reference.
 
@@ -152,48 +153,14 @@ You do **not** need to run the React app in production after migration. The Reac
 
 ## 5. Local development setup
 
-Pick **one** local stack. All give you `http://kztravel.local` (or similar) with wp-admin.
+Use **[Local](https://localwp.com/)** (by WP Engine). It gives you `http://kztravel.local` (or similar) with wp-admin.
 
-### Option A: Local (by WP Engine) — easiest on Windows
+### Install Local and create the site
 
-1. Download [Local](https://localwp.com/).
+1. Download and install [Local](https://localwp.com/).
 2. **+ Create a new site** → name: `kztravel` → Preferred: **Custom** → PHP 8.2, nginx or Apache, MySQL 8.
 3. After creation, open **Site folder** → `app/public/` is your web root (`wp-content/themes/` lives here).
-4. Default admin: shown in Local UI (e.g. `admin` / random password).
-
-### Option B: wp-env (Docker, good if you already use Docker)
-
-From a folder that will hold the theme:
-
-```bash
-# In theme repo root, after adding .wp-env.json (see below)
-npm init -y
-npm install @wordpress/env --save-dev
-npx wp-env start
-```
-
-`.wp-env.json` example:
-
-```json
-{
-  "core": "WordPress/WordPress",
-  "phpVersion": "8.2",
-  "themes": ["./"],
-  "plugins": [
-    "https://downloads.wordpress.org/plugin/advanced-custom-fields.latest-stable.zip"
-  ],
-  "port": 8888
-}
-```
-
-- Site: `http://localhost:8888`
-- Admin: `http://localhost:8888/wp-admin` (user `admin`, password `password`)
-
-### Option C: Laragon (Windows, lightweight)
-
-1. [Laragon](https://laragon.org/) → Quick app → WordPress.
-2. Document root: `C:\laragon\www\kztravel`.
-3. Create DB via Laragon, run WP installer at `http://kztravel.test`.
+4. Default admin credentials are shown in the Local UI (e.g. `admin` / random password).
 
 ### After WordPress is running
 
@@ -619,7 +586,7 @@ define( 'DISALLOW_FILE_EDIT', true );
 Local (dev)  →  Staging (staging.yourdomain.com)  →  Production (yourdomain.com)
      │                    │                                    │
   Git theme            DB sync                            Live traffic
-  wp-env/Local         Duplicator / WP Migrate              Backups
+  Local                Duplicator / WP Migrate              Backups
 ```
 
 1. Hosts often provide **staging** with one click (SiteGround, Kinsta).
@@ -686,22 +653,21 @@ Local (dev)  →  Staging (staging.yourdomain.com)  →  Production (yourdomain.
 
 ## Quick reference: day-one commands
 
+In Local, open the site → **Open site shell**, then run WP-CLI:
+
 ```bash
-# Local with wp-env
-npx wp-env start
-npx wp-env run cli wp plugin install advanced-custom-fields --activate
-npx wp-env run cli wp theme activate kztravel
-
-# Flush permalinks after CPT registration
-npx wp-env run cli wp rewrite flush
-
-# Export DB from local
-npx wp-env run cli wp db export /var/www/html/kztravel.sql
+wp plugin install advanced-custom-fields --activate
+wp theme activate kztravel
+wp rewrite flush
+wp db export kztravel.sql
 ```
 
+Create the theme symlink from PowerShell (adjust paths):
+
 ```powershell
-# Create theme symlink (Local) — adjust paths
-New-Item -ItemType SymbolicLink -Path "<local-site>\app\public\wp-content\themes\kztravel" -Target "<repo>\wordpress-theme"
+New-Item -ItemType SymbolicLink `
+  -Path "C:\Users\Nikola\Local Sites\kztravel\app\public\wp-content\themes\kztravel" `
+  -Target "C:\Users\Nikola\source\repos\nedevski\kztravel\wordpress-theme"
 ```
 
 ---

@@ -312,7 +312,7 @@ npm run preview  # preview production build locally
 ## 7. Suggested project layout (implementation)
 
 ```
-kztravel/
+kztravelreact/
   docs/
     requirements.md          # this file
   data/

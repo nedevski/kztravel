@@ -269,7 +269,7 @@ excluded:
 ## За програмисти
 
 ```bash
-cd kztravel
+cd kztravelreact
 npm install
 npm run dev      # локален сървър за разработка
 npm run build    # статичен build в dist/
