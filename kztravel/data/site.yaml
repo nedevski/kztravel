@@ -1,0 +1,23 @@
+title: Ваканции Казанлък
+favicon: /images/favicon.svg
+background: /images/bg.svg
+contact:
+  phone: "+359 888 123 456"
+  email: info@kztravel.bg
+  address: 'ул. „Измислена“ 123, гр. Казанлък'
+  mapEmbedUrl: https://www.openstreetmap.org/export/embed.html?bbox=25.3902%2C42.6164%2C25.3954%2C42.6214&layer=mapnik&marker=42.6189%2C25.3928
+  workingHours:
+    - '9:00–18:00'
+    - '9:00–18:00'
+    - '9:00–18:00'
+    - '9:00–18:00'
+    - '9:00–18:00'
+    - '10:00–14:00'
+    - 'почивен ден'
+  bankDetails:
+    bankName: 'Банка ДСК'
+    iban: 'BG00AAAA00000000000000'
+    holder: 'ФИРМА ЕООД'
+footer:
+  registration: Свидетелство за регистрация на туроператор номер РК-00-00000
+  company: ФИРМА ЕООД

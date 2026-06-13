@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Пазар с подправки">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b91c1c"/>
+      <stop offset="55%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0.35" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#082f49" stop-opacity="0.65"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0.55" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.78" cy="0.18" r="0.28">
+      <stop offset="0%" stop-color="#fff7ed" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#fde68a" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <rect width="800" height="500" fill="url(#sun)"/>
+  <rect width="800" height="500" fill="url(#haze)"/>
+  <ellipse cx="140" cy="95" rx="95" ry="22" fill="#ffffff" opacity="0.1"/>
+  <ellipse cx="210" cy="88" rx="60" ry="16" fill="#ffffff" opacity="0.08"/>
+  <ellipse cx="520" cy="72" rx="110" ry="20" fill="#ffffff" opacity="0.09"/>
+  <ellipse cx="640" cy="80" rx="70" ry="15" fill="#ffffff" opacity="0.07"/>
+  <path d="M0 300 C200 275 400 268 600 285 S760 278 800 298 L800 500 L0 500 Z" fill="#0f172a" opacity="0.12"/>
+  <path d="M100 340 C140 320 180 312 220 315 C260 305 300 300 340 305 C380 298 420 295 460 300 C500 295 540 292 580 298 C620 292 660 295 700 305 L700 340 L100 340 Z" fill="#0f172a" opacity="0.38"/>
+  <path d="M120 315 C180 300 240 292 300 295 C360 288 420 285 480 290 C540 285 600 288 660 298 C620 278 560 268 500 265 C440 260 380 262 320 268 C260 272 200 282 140 295 Z" fill="#0f172a" opacity="0.32"/>
+  <rect x="0" y="300" width="800" height="200" fill="#ffffff" opacity="0.04"/>
+  <rect width="800" height="500" fill="url(#scrim)"/>
+  <text x="400" y="468" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="26" font-weight="600" letter-spacing="0.02em">Пазар с подправки</text>
+</svg>

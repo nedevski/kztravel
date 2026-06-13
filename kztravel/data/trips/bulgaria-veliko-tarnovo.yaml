@@ -1,0 +1,63 @@
+name: Велико Търново и Трявна
+description: >
+  Тридневна екскурзия из сърцето на България - Царевец, Самоводската чаршия
+  и занаятчийският дух на Трявна. Идеален уикенд за култура, история и
+  автентична българска атмосфера.
+country: bulgaria
+duration: 3 дни
+category:
+  - култура
+  - екскурзия
+  - уикенд
+  - с-водач
+thumbnails:
+  - https://images.unsplash.com/photo-1662486644880-dbe1a37cd124?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1665476612000-554febb1a86a?w=1200&h=750&fit=crop&q=85&auto=format
+dates:
+  - date: 2026-05-15
+    price: 195
+    priceBgn: 381
+    status: available
+  - date: 2026-09-11
+    price: 195
+    priceBgn: 381
+    status: available
+  - date: 2026-10-09
+    price: 185
+    priceBgn: 362
+    status: lastSpots
+gallery:
+  - https://images.unsplash.com/photo-1662486644880-dbe1a37cd124?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1662965996198-4b0d0e64ca65?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1668013714349-72bf26e967fd?w=1200&h=750&fit=crop&q=85&auto=format
+itinerary:
+  - day: 1
+    title: Велико Търново
+    description: >
+      Пристигане и настаняване. Обиколка на крепостта Царевец, Асеновата колона
+      и пешеходна разходка из стария град с водач.
+  - day: 2
+    title: Трявна
+    description: >
+      Екскурзия до Трявна - музея на занаятите, Часовниковата кула и уличките
+      с възрожденски къщи. Свободно време за сувенири и обяд.
+  - day: 3
+    title: Арбанаси и отпътуване
+    description: >
+      Посещение на Арбанаси с църквите „Св. Архангели“ и „Рождество Христово“.
+      Обяд и трансфер обратно.
+included:
+  - name: Настаняване в хотел (2 нощи)
+    price: 0
+  - name: Закуска всеки ден
+    price: 0
+  - name: Трансфер от/до Казанлък
+    price: 0
+  - name: Обиколки с водач (Царевец, Трявна, Арбанаси)
+    price: 0
+excluded:
+  - name: Обяд и вечеря
+    price: 0
+  - name: Входни такси за обекти
+    price: 12
+    priceBgn: 23

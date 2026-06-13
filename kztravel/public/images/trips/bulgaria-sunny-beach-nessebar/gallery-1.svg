@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Слънчев бряг">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0369a1"/>
+      <stop offset="55%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0.35" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#082f49" stop-opacity="0.65"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0.55" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.78" cy="0.18" r="0.28">
+      <stop offset="0%" stop-color="#fff7ed" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#fde68a" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <rect width="800" height="500" fill="url(#sun)"/>
+  <rect width="800" height="500" fill="url(#haze)"/>
+  <ellipse cx="140" cy="95" rx="95" ry="22" fill="#ffffff" opacity="0.1"/>
+  <ellipse cx="210" cy="88" rx="60" ry="16" fill="#ffffff" opacity="0.08"/>
+  <ellipse cx="520" cy="72" rx="110" ry="20" fill="#ffffff" opacity="0.09"/>
+  <ellipse cx="640" cy="80" rx="70" ry="15" fill="#ffffff" opacity="0.07"/>
+  <rect x="0" y="300" width="800" height="200" fill="url(#sea)"/>
+  <path d="M0 308 C120 296 240 310 400 304 S680 294 800 308" stroke="#e0f2fe" stroke-width="1.2" fill="none" opacity="0.22"/>
+  <path d="M0 328 C160 316 320 334 480 322 S720 330 800 324" stroke="#e0f2fe" stroke-width="0.8" fill="none" opacity="0.14"/>
+  <path d="M0 352 C200 342 400 358 600 346 S760 354 800 350" stroke="#bae6fd" stroke-width="0.6" fill="none" opacity="0.1"/>
+  <path d="M0 355 C140 337 280 361 420 345 S700 359 800 349 L800 500 L0 500 Z" fill="url(#sand)"/>
+  <path d="M0 305 C120 285 240 278 360 290 S580 275 800 295 L800 355 L0 355 Z" fill="#0f172a" opacity="0.1"/>
+  <path d="M0 355 C200 340 400 348 600 338 S760 345 800 340" stroke="#ffffff" stroke-width="0.8" opacity="0.15" fill="none"/>
+  <rect width="800" height="500" fill="url(#scrim)"/>
+  <text x="400" y="468" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="26" font-weight="600" letter-spacing="0.02em">Слънчев бряг</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Морска градина">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="55%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0.35" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#082f49" stop-opacity="0.65"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0.55" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.78" cy="0.18" r="0.28">
+      <stop offset="0%" stop-color="#fff7ed" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#fde68a" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <rect width="800" height="500" fill="url(#sun)"/>
+  <rect width="800" height="500" fill="url(#haze)"/>
+  <ellipse cx="140" cy="95" rx="95" ry="22" fill="#ffffff" opacity="0.1"/>
+  <ellipse cx="210" cy="88" rx="60" ry="16" fill="#ffffff" opacity="0.08"/>
+  <ellipse cx="520" cy="72" rx="110" ry="20" fill="#ffffff" opacity="0.09"/>
+  <ellipse cx="640" cy="80" rx="70" ry="15" fill="#ffffff" opacity="0.07"/>
+  <rect x="0" y="330" width="800" height="170" fill="url(#sea)"/>
+  <path d="M0 338 C120 326 240 340 400 334 S680 324 800 338" stroke="#e0f2fe" stroke-width="1.2" fill="none" opacity="0.22"/>
+  <path d="M0 358 C160 346 320 364 480 352 S720 360 800 354" stroke="#e0f2fe" stroke-width="0.8" fill="none" opacity="0.14"/>
+  <path d="M0 382 C200 372 400 388 600 376 S760 384 800 380" stroke="#bae6fd" stroke-width="0.6" fill="none" opacity="0.1"/>
+  <path d="M0 320 C200 295 400 288 600 305 S760 298 800 315 L800 330 L0 330 Z" fill="#0f172a" opacity="0.11"/>
+  <ellipse cx="80" cy="306.6" rx="46.800000000000004" ry="28.6" fill="#0f172a" opacity="0.2"/>
+  <rect x="77" y="319.6" width="6" height="18.2" fill="#0f172a" opacity="0.18"/>
+  <ellipse cx="150" cy="300.75" rx="58.5" ry="35.75" fill="#0f172a" opacity="0.2"/>
+  <rect x="147" y="317" width="6" height="22.75" fill="#0f172a" opacity="0.18"/>
+  <ellipse cx="230" cy="303.9" rx="52.2" ry="31.900000000000002" fill="#0f172a" opacity="0.2"/>
+  <rect x="227" y="318.4" width="6" height="20.299999999999997" fill="#0f172a" opacity="0.18"/>
+  <ellipse cx="310" cy="297.6" rx="64.8" ry="39.6" fill="#0f172a" opacity="0.2"/>
+  <rect x="307" y="315.6" width="6" height="25.2" fill="#0f172a" opacity="0.18"/>
+  <ellipse cx="400" cy="303" rx="54" ry="33" fill="#0f172a" opacity="0.2"/>
+  <rect x="397" y="318" width="6" height="21" fill="#0f172a" opacity="0.18"/>
+  <ellipse cx="490" cy="299.4" rx="61.2" ry="37.400000000000006" fill="#0f172a" opacity="0.2"/>
+  <rect x="487" y="316.4" width="6" height="23.799999999999997" fill="#0f172a" opacity="0.18"/>
+  <ellipse cx="580" cy="305.25" rx="49.5" ry="30.250000000000004" fill="#0f172a" opacity="0.2"/>
+  <rect x="577" y="319" width="6" height="19.25" fill="#0f172a" opacity="0.18"/>
+  <ellipse cx="660" cy="302.1" rx="55.800000000000004" ry="34.1" fill="#0f172a" opacity="0.2"/>
+  <rect x="657" y="317.6" width="6" height="21.7" fill="#0f172a" opacity="0.18"/>
+  <ellipse cx="740" cy="307.5" rx="45" ry="27.500000000000004" fill="#0f172a" opacity="0.2"/>
+  <rect x="737" y="320" width="6" height="17.5" fill="#0f172a" opacity="0.18"/>
+  <path d="M60 330 C200 318 340 322 480 315 S700 320 800 312" stroke="#0f172a" stroke-width="1.5" opacity="0.12" fill="none"/>
+  <path d="M0 348 C140 330 280 354 420 338 S700 352 800 342 L800 500 L0 500 Z" fill="url(#sand)"/>
+  <rect width="800" height="500" fill="url(#scrim)"/>
+  <text x="400" y="468" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="26" font-weight="600" letter-spacing="0.02em">Морска градина</text>
+</svg>

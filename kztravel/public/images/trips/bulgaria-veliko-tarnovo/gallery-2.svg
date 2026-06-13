@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Трявна">
+  <defs>
+    <linearGradient id="sky" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7c2d12"/>
+      <stop offset="55%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0.35" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#082f49" stop-opacity="0.65"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0.55" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.78" cy="0.18" r="0.28">
+      <stop offset="0%" stop-color="#fff7ed" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#fde68a" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <rect width="800" height="500" fill="url(#sun)"/>
+  <rect width="800" height="500" fill="url(#haze)"/>
+  <ellipse cx="140" cy="95" rx="95" ry="22" fill="#ffffff" opacity="0.1"/>
+  <ellipse cx="210" cy="88" rx="60" ry="16" fill="#ffffff" opacity="0.08"/>
+  <ellipse cx="520" cy="72" rx="110" ry="20" fill="#ffffff" opacity="0.09"/>
+  <ellipse cx="640" cy="80" rx="70" ry="15" fill="#ffffff" opacity="0.07"/>
+  <path d="M0 330 C150 280 280 265 400 285 S620 260 800 300 L800 500 L0 500 Z" fill="#0f172a" opacity="0.14"/>
+  <path d="M0 360 C180 320 340 310 500 328 S700 315 800 345 L800 500 L0 500 Z" fill="#0f172a" opacity="0.18"/>
+  <path d="M60 360 C120 340 180 330 230 338 C250 300 265 275 278 248 C286 275 295 305 305 335 C360 325 420 318 480 328 C510 305 530 285 545 262 C558 290 570 318 585 340 C640 332 700 340 760 355 L760 360 L60 360 Z" fill="#0f172a" opacity="0.46"/>
+  <path d="M278 248 L272 220 L285 200 L298 220 L292 248 Z" fill="#0f172a" opacity="0.52"/>
+  <path d="M120 360 C220 352 320 348 420 355 S620 350 720 358" stroke="#0f172a" stroke-width="1" opacity="0.12" fill="none"/>
+  <rect width="800" height="500" fill="url(#scrim)"/>
+  <text x="400" y="468" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="26" font-weight="600" letter-spacing="0.02em">Трявна</text>
+</svg>

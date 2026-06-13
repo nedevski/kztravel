@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Истанбул">
+  <defs>
+    <linearGradient id="sky" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4c1d95"/>
+      <stop offset="55%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0.35" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#082f49" stop-opacity="0.65"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0.55" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.78" cy="0.18" r="0.28">
+      <stop offset="0%" stop-color="#fff7ed" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#fde68a" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <rect width="800" height="500" fill="url(#sun)"/>
+  <rect width="800" height="500" fill="url(#haze)"/>
+  <ellipse cx="140" cy="95" rx="95" ry="22" fill="#ffffff" opacity="0.1"/>
+  <ellipse cx="210" cy="88" rx="60" ry="16" fill="#ffffff" opacity="0.08"/>
+  <ellipse cx="520" cy="72" rx="110" ry="20" fill="#ffffff" opacity="0.09"/>
+  <ellipse cx="640" cy="80" rx="70" ry="15" fill="#ffffff" opacity="0.07"/>
+  <rect x="0" y="325" width="800" height="175" fill="url(#sea)"/>
+  <path d="M0 333 C120 321 240 335 400 329 S680 319 800 333" stroke="#e0f2fe" stroke-width="1.2" fill="none" opacity="0.22"/>
+  <path d="M0 353 C160 341 320 359 480 347 S720 355 800 349" stroke="#e0f2fe" stroke-width="0.8" fill="none" opacity="0.14"/>
+  <path d="M0 377 C200 367 400 383 600 371 S760 379 800 375" stroke="#bae6fd" stroke-width="0.6" fill="none" opacity="0.1"/>
+  <path d="M0 310 C200 290 400 282 600 300 S760 292 800 312 L800 330 L0 330 Z" fill="#0f172a" opacity="0.14"/>
+  <path d="M0 330 C120 322 220 315 300 312 C310 280 320 240 328 195 C336 155 345 125 355 100 C365 125 374 155 382 195 C390 240 398 280 408 312 C480 308 560 312 640 320 C660 295 675 275 688 255 C702 278 715 302 728 322 C755 318 780 325 800 330 L800 330 Z" fill="#0f172a" opacity="0.44"/>
+  <path d="M355 100 L340 135 L370 135 Z M382 195 L400 55 L418 195 Z" fill="#0f172a" opacity="0.5"/>
+  <rect width="800" height="500" fill="url(#scrim)"/>
+  <text x="400" y="462" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="34" font-weight="600" letter-spacing="0.02em">Истанбул</text>
+</svg>

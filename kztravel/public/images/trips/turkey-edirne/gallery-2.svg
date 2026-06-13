@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Капи куле">
+  <defs>
+    <linearGradient id="sky" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b91c1c"/>
+      <stop offset="55%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0.35" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#082f49" stop-opacity="0.65"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0.55" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.78" cy="0.18" r="0.28">
+      <stop offset="0%" stop-color="#fff7ed" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#fde68a" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <rect width="800" height="500" fill="url(#sun)"/>
+  <rect width="800" height="500" fill="url(#haze)"/>
+  <ellipse cx="140" cy="95" rx="95" ry="22" fill="#ffffff" opacity="0.1"/>
+  <ellipse cx="210" cy="88" rx="60" ry="16" fill="#ffffff" opacity="0.08"/>
+  <ellipse cx="520" cy="72" rx="110" ry="20" fill="#ffffff" opacity="0.09"/>
+  <ellipse cx="640" cy="80" rx="70" ry="15" fill="#ffffff" opacity="0.07"/>
+  <rect x="0" y="355" width="800" height="145" fill="url(#sea)"/>
+  <path d="M0 363 C120 351 240 365 400 359 S680 349 800 363" stroke="#e0f2fe" stroke-width="1.2" fill="none" opacity="0.22"/>
+  <path d="M0 383 C160 371 320 389 480 377 S720 385 800 379" stroke="#e0f2fe" stroke-width="0.8" fill="none" opacity="0.14"/>
+  <path d="M0 407 C200 397 400 413 600 401 S760 409 800 405" stroke="#bae6fd" stroke-width="0.6" fill="none" opacity="0.1"/>
+  <path d="M0 330 C200 305 400 298 600 318 S760 310 800 330 L800 355 L0 355 Z" fill="#0f172a" opacity="0.15"/>
+  <path d="M310 355 L310 210 L340 175 L370 155 L400 140 L430 155 L460 175 L490 210 L490 355 Z" fill="#0f172a" opacity="0.45"/>
+  <path d="M370 155 L400 115 L430 155 Z" fill="#0f172a" opacity="0.5"/>
+  <path d="M120 355 C280 345 520 348 680 352" stroke="#0f172a" stroke-width="2" opacity="0.15" fill="none"/>
+  <path d="M120 365 C400 352 600 358 680 360" stroke="#0f172a" stroke-width="1" opacity="0.08" fill="none"/>
+  <rect width="800" height="500" fill="url(#scrim)"/>
+  <text x="400" y="468" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="26" font-weight="600" letter-spacing="0.02em">Капи куле</text>
+</svg>

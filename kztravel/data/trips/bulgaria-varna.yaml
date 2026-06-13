@@ -1,0 +1,57 @@
+name: Варна на море
+description: >
+  Двудневна екскурзия до морската столица - Северното пристанище, Морската градина,
+  катедралата и плажът на Варна. Компактна почивка с градски колорит и морски бриз.
+country: bulgaria
+duration: 2 дни
+category:
+  - плаж
+  - градска-ваканция
+  - лято
+  - уикенд
+thumbnails:
+  - https://images.unsplash.com/photo-1674975500529-c037968e6122?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1642485691986-700d98c0abcb?w=1200&h=750&fit=crop&q=85&auto=format
+dates:
+  - date: 2026-06-20
+    price: 150
+    priceBgn: 293
+    status: available
+  - date: 2026-07-11
+    price: 155
+    priceBgn: 303
+    status: available
+  - date: 2026-08-15
+    price: 155
+    priceBgn: 303
+    status: available
+gallery:
+  - https://images.unsplash.com/photo-1572381064666-01b80bd6f53f?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1674975500529-c037968e6122?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1642485691986-700d98c0abcb?w=1200&h=750&fit=crop&q=85&auto=format
+itinerary:
+  - day: 1
+    title: Варна - град и море
+    description: >
+      Пристигане, настаняване и пешеходна обиколка - катедралата „Св. Успение Богородично“,
+      Морската градина и плажът. Вечеря по желание на крайбрежната алея.
+  - day: 2
+    title: Археологически музей и отпътуване
+    description: >
+      Посещение на Археологическия музей с най-старото злато в света.
+      Свободно време за плаж и следобеден трансфер.
+included:
+  - name: Настаняване в хотел (1 нощ)
+    price: 0
+  - name: Закуска
+    price: 0
+  - name: Трансфер от/до Казанлък
+    price: 0
+  - name: Градска обиколка с водач
+    price: 0
+excluded:
+  - name: Обяд и вечеря
+    price: 0
+  - name: Вход за Археологическия музей
+    price: 5
+    priceBgn: 10

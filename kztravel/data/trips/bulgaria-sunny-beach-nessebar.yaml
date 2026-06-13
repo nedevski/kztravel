@@ -1,0 +1,61 @@
+name: Слънчев Бряг и Несебър
+description: >
+  Тридневна почивка на южното Черноморие - златен пясък в Слънчев бряг,
+  разходка из стария Несебър и време за море. Подходяща за семейства
+  и приятели, търсещи близка морска ваканция.
+country: bulgaria
+duration: 3 дни
+category:
+  - плаж
+  - лято
+  - семейно
+  - с-водач
+thumbnails:
+  - https://images.unsplash.com/photo-1759178390552-eefb04f5a62c?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1683653418429-17c5a039fc25?w=1200&h=750&fit=crop&q=85&auto=format
+dates:
+  - date: 2026-07-03
+    price: 220
+    priceBgn: 430
+    status: available
+  - date: 2026-07-17
+    price: 220
+    priceBgn: 430
+    status: available
+  - date: 2026-08-07
+    price: 235
+    priceBgn: 460
+    status: lastSpots
+gallery:
+  - https://images.unsplash.com/photo-1683653418429-17c5a039fc25?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1759178390552-eefb04f5a62c?w=1200&h=750&fit=crop&q=85&auto=format
+  - https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&h=750&fit=crop&q=85&auto=format
+itinerary:
+  - day: 1
+    title: Пристигане в Слънчев бряг
+    description: >
+      Трансфер и настаняване. Свободно време на плажа и вечерна разходка
+      по крайбрежната алея.
+  - day: 2
+    title: Старият Несебър
+    description: >
+      Екскурзия до архитектурния резерват Несебър - средновековни църкви,
+      занаятчийски ателиета и рибарски таверни. Следобед - море в Слънчев бряг.
+  - day: 3
+    title: Море и отпътуване
+    description: >
+      Цял ден на плажа по желание. Обяд и следобеден трансфер обратно.
+included:
+  - name: Настаняване в хотел (2 нощи)
+    price: 0
+  - name: Закуска всеки ден
+    price: 0
+  - name: Трансфер от/до Казанлък
+    price: 0
+  - name: Обиколка на стария Несебър с водач
+    price: 0
+excluded:
+  - name: Обяд и вечеря
+    price: 0
+  - name: Шезлонги и чадъри на плажа
+    price: 0
