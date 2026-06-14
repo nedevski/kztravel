@@ -1,0 +1,28 @@
+/* Single-column trip edit — main form uses full width */
+.post-type-trip #post-body.columns-2 #postbox-container-1 {
+	display: none;
+}
+
+.post-type-trip #post-body.columns-2 #post-body-content {
+	margin-right: 0;
+}
+
+.post-type-trip #post-body-content .metabox-holder {
+	padding-top: 0;
+}
+
+/* Itinerary repeater: title 33%, description fills the rest (col 1 = drag handle) */
+.post-type-trip [data-key="field_trip_itinerary"] .acf-table > thead > tr > th:nth-child(2),
+.post-type-trip [data-key="field_trip_itinerary"] .acf-table > tbody > tr > td:nth-child(2) {
+	width: 33%;
+}
+
+.post-type-trip [data-key="field_trip_itinerary"] .acf-table > thead > tr > th:nth-child(3),
+.post-type-trip [data-key="field_trip_itinerary"] .acf-table > tbody > tr > td:nth-child(3) {
+	width: 67%;
+}
+
+.post-type-trip [data-key="field_trip_itinerary"] .acf-table textarea {
+	min-height: 6em;
+	width: 100%;
+}

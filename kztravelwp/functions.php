@@ -7,6 +7,7 @@ define( 'KZTRAVEL_URI', get_template_directory_uri() );
 
 require_once KZTRAVEL_DIR . '/inc/setup.php';
 require_once KZTRAVEL_DIR . '/inc/post-types.php';
+require_once KZTRAVEL_DIR . '/inc/admin-trip-editor.php';
 require_once KZTRAVEL_DIR . '/inc/acf-fields.php';
 require_once KZTRAVEL_DIR . '/inc/options.php';
 require_once KZTRAVEL_DIR . '/inc/strings.php';

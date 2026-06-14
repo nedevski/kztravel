@@ -37,8 +37,8 @@ add_action(
 				'has_archive'  => false,
 				'rewrite'      => array( 'slug' => 'trips' ),
 				'menu_icon'    => 'dashicons-palmtree',
-				'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-				'show_in_rest' => true,
+				'supports'     => array( 'title' ),
+				'show_in_rest' => false,
 			)
 		);
 

@@ -254,7 +254,6 @@ function kztravel_enrich_trip( int $post_id ): array {
 		foreach ( $itinerary_raw as $day ) {
 			$body = (string) ( $day['body'] ?? $day['description'] ?? '' );
 			$itinerary[] = array(
-				'day'   => (int) ( $day['day'] ?? 0 ),
 				'title' => $day['title'] ?? '',
 				'body'  => preg_replace( '/<br\s*\/?>\r?\n?/i', "\n", $body ),
 			);
@@ -274,14 +273,15 @@ function kztravel_enrich_trip( int $post_id ): array {
 	$last_date         = $ended ? kztravel_get_most_recent_date( $dates ) : null;
 	$price_date        = $lowest_date ?? $last_date;
 
-	$hero_url = get_the_post_thumbnail_url( $post_id, 'large' ) ?: '';
+	$hero_url    = get_the_post_thumbnail_url( $post_id, 'large' ) ?: '';
+	$description = (string) kztravel_get_trip_field( $post_id, 'trip_description', '' );
 
 	return array(
 		'id'                         => $post_id,
 		'slug'                       => $post->post_name,
 		'name'                       => $trip_name,
-		'description'                => apply_filters( 'the_content', $post->post_content ),
-		'description_plain'          => wp_strip_all_tags( $post->post_content ),
+		'description'                => apply_filters( 'the_content', $description ),
+		'description_plain'          => wp_strip_all_tags( $description ),
 		'country'                    => $country,
 		'duration'                   => (string) ( kztravel_get_trip_field( $post_id, 'trip_duration', '' ) ?: '' ),
 		'category'                   => $categories,

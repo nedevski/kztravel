@@ -429,9 +429,10 @@ Document this for the agency staff replacing the README YAML section.
 
 | Task | Where in wp-admin |
 |------|-------------------|
-| Add a trip | **Trips → Add New** |
-| Change prices/dates | Edit trip → **Dates** repeater |
-| Upload photos | **Gallery** field or Media Library |
+| Add a trip | **Екскурзии → Добави** — title + tabbed form (Основни, Дати и цени, Галерия, Маршрут, Услуги) |
+| Edit description / hero / country | Trip edit → **Основни** tab (`trip_description`, `trip_hero`, taxonomies, duration) |
+| Change prices/dates | Edit trip → **Дати и цени** tab |
+| Upload photos | **Галерия** tab or Media Library |
 | Change phone/email | **Site Settings** (SCF Options) |
 | Edit booking info | **Pages → Booking** |
 | Change homepage text | **Pages → Home** or theme Customizer |
@@ -444,7 +445,8 @@ Document this for the agency staff replacing the README YAML section.
 Train editors on:
 
 - Setting date `status` to `available` / `lastSpots` / `soldout`
-- Featured image vs gallery
+- Hero image is set in **Основни** tab (not the Featured Image sidebar)
+- Gallery images are separate from the hero image
 - Not uploading 10 MB originals (use compressed JPEG/WebP)
 
 ---

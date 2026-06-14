@@ -190,7 +190,7 @@ foreach ( $trip_files as $file ) {
 			'post_title'   => $trip['name'] ?? $slug,
 			'post_name'    => $slug,
 			'post_status'  => 'publish',
-			'post_content' => trim( $trip['description'] ?? '' ),
+			'post_content' => '',
 		),
 		true
 	);
@@ -199,6 +199,8 @@ foreach ( $trip_files as $file ) {
 		WP_CLI::warning( $post_id->get_error_message() );
 		continue;
 	}
+
+	kztravel_update_trip_field( $post_id, 'trip_description', trim( $trip['description'] ?? '' ) );
 
 	if ( ! empty( $trip['country'] ) ) {
 		wp_set_object_terms( $post_id, array( $trip['country'] ), 'trip_country', false );
@@ -236,7 +238,6 @@ foreach ( $trip_files as $file ) {
 	$itinerary_rows = array();
 	foreach ( $trip['itinerary'] ?? array() as $day ) {
 		$itinerary_rows[] = array(
-			'day'   => $day['day'] ?? 0,
 			'title' => trim( $day['title'] ?? '' ),
 			'body'  => trim( $day['description'] ?? $day['body'] ?? '' ),
 		);
@@ -266,6 +267,7 @@ foreach ( $trip_files as $file ) {
 		$hero_id = kztravel_import_sideload_image( $thumbnails[0], $post_id, $trip['name'] ?? $slug );
 		if ( $hero_id ) {
 			set_post_thumbnail( $post_id, $hero_id );
+			kztravel_update_trip_field( $post_id, 'trip_hero', $hero_id );
 		}
 	}
 

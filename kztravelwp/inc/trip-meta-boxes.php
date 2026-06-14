@@ -110,7 +110,6 @@ add_action(
 					continue;
 				}
 				$itinerary[] = array(
-					'day'   => isset( $row['day'] ) ? (int) $row['day'] : 0,
 					'title' => $title,
 					'body'  => $body,
 				);
@@ -331,26 +330,15 @@ function kztravel_render_trip_itinerary_meta_section( array $itinerary ): void {
 function kztravel_render_trip_itinerary_row( $index, array $row ): void {
 	?>
 	<div class="kztravel-trip-meta__card kztravel-trip-meta__row">
-		<div class="kztravel-trip-meta__card-grid">
-			<p>
-				<label>Ден</label>
-				<input
-					type="number"
-					min="1"
-					name="kztravel_trip_itinerary[<?php echo esc_attr( (string) $index ); ?>][day]"
-					value="<?php echo esc_attr( isset( $row['day'] ) ? (string) (int) $row['day'] : '' ); ?>"
-				/>
-			</p>
-			<p>
-				<label>Заглавие</label>
-				<input
-					type="text"
-					class="widefat"
-					name="kztravel_trip_itinerary[<?php echo esc_attr( (string) $index ); ?>][title]"
-					value="<?php echo esc_attr( $row['title'] ?? '' ); ?>"
-				/>
-			</p>
-		</div>
+		<p>
+			<label>Заглавие</label>
+			<input
+				type="text"
+				class="widefat"
+				name="kztravel_trip_itinerary[<?php echo esc_attr( (string) $index ); ?>][title]"
+				value="<?php echo esc_attr( $row['title'] ?? '' ); ?>"
+			/>
+		</p>
 		<p>
 			<label>Описание</label>
 			<textarea
